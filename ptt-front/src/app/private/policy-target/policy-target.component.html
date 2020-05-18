@@ -1,0 +1,49 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">
+      Policy and Target <span class="active"> > {{name}} </span>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <filter-box (searchCallback)="searchCallback($event)"></filter-box>
+  </div>
+</div>
+
+<div class="cleaner"></div>
+
+<div class="row font-subtopic">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+  <!-- Detail -->
+  <div class="col-12 col-md-6 col-xl-4" *ngFor="let item of data.policys" [hidden]="loading">
+      <div class="all-training">
+          <a href="javascript:void(0)">
+              <div class="img-training">
+                <ng-container *ngIf="item.thumbnail; else elseTemplate">
+                  <img [src]="item.thumbnail" class="w-100">
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <img [src]="'assets/cover_default/Policy-Target.png'" class="w-100">
+                </ng-template>
+                <div class="download-training" (click)="downloadFile(item)">Download</div>
+              </div>
+            </a>
+            <div class="col-12 line-clamp-4">
+                {{ item.topic }}
+            </div>  
+      </div>
+  </div>
+  <div class="col-12 col-md-6 col-xl-4" *ngIf="!data.policys || data.policys.length == 0" [hidden]="loading">
+      <p>No data found.</p>
+  </div>
+</div>
+
+<div class="cleaner h30"></div>
+<div class="box-page box-page-1">
+
+  <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+    [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+  </ngb-pagination>
+
+</div>

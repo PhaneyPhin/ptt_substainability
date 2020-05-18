@@ -1,0 +1,16 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">
+      <span class="active"> Applications </span>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <!-- <filter-box (searchCallback)="searchCallback($event)"></filter-box> -->
+  </div>
+</div>
+
+<div class="cleaner"></div>
+<ng-container *ngIf="data">
+  <ptt-app [data]="data.data" *ngIf="data.displayType === 'PTT_GROUP' "></ptt-app>
+  <not-ptt-app [data]="data.data" *ngIf="data.displayType === 'PTT'"></not-ptt-app>
+</ng-container>

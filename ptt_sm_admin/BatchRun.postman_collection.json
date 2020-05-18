@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "889b2761-118e-41d8-abc5-0977b2757384",
+		"name": "BatchRun",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetBatchList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFkbWluIiwiSUQiOiIxIiwiVXNlcm5hbWUiOiJzdXBlcmFkIiwibmJmIjoxNTc5NDI2NTM5LCJleHAiOjE1Nzk1MTI5MzksImlhdCI6MTU3OTQyNjUzOX0.nYWsv0xlp3Q3_99Ndfmh-DJEm7Z0PQgOr684mEMlQ0w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/batch/getBatchList",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"batch",
+						"getBatchList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RunBatch",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFkbWluIiwiSUQiOiIxIiwiVXNlcm5hbWUiOiJzdXBlcmFkIiwibmJmIjoxNTc5NDI2NTM5LCJleHAiOjE1Nzk1MTI5MzksImlhdCI6MTU3OTQyNjUzOX0.nYWsv0xlp3Q3_99Ndfmh-DJEm7Z0PQgOr684mEMlQ0w"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/batch/runBatch",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"batch",
+						"runBatch"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

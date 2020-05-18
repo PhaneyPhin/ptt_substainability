@@ -1,0 +1,224 @@
+<script type="text/javascript">
+    if(typeof app === 'undefined'){
+        document.location.href="index.html";
+    }
+</script>
+
+<div ng-controller="EditCorperate as ctrl" class="page-product" ng-show="ctrl.canEdit">
+    <div class="title">Edit </div>
+    <ol class="breadcrumb margin0">
+        <li><i class="fa fa-home"></i> <a href="" ng-click="ctrl.goto('Dashboard')">Home</a></li>
+        <li><i class="fa fa-user"></i> <a href="" ng-click="ctrl.goto('AdminUser')"> User Corperate </a></li>
+        <li class="active"><i class="fas fa-edit"></i> Edit </li>
+    </ol>
+
+    <form name="frmEdit" id="frmEdit" method="POST" novalidate>
+        <!--action="fn_save.php"-->
+
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+
+            <div class="widget-box-blue">
+                <div class="widget-title" lang="th"><i class="fa fa-user"></i> User (Add) </div>
+                <ul class="widget-tool navbar-right">
+                    <li><i class="fa fa-caret-up show-hide-widget"></i></li>
+                </ul>
+                <div class="widget-inbox">
+                    <input type="hidden" name="action" value="add">
+                    <input type="hidden" name="id" value="2">
+                    <div class="form-box">
+                        <div class="container">
+                                <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-3">
+                                                <label class="contain">
+                                                        <span>PTT</span>
+                                                        <input type="radio" checked="checked" name="radio" ng-model="ctrl.type" value="PTT" ng-change="ctrl.type_change()">
+                                                        <span class="checkmark"></span>
+                                                      </label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                                <label class="contain">
+                                                        <span>BSA</span>
+                                                        <input type="radio" name="radio" ng-model="ctrl.type" value="BSA" ng-change="ctrl.type_change()">
+                                                        <span class="checkmark"></span>
+                                                </label>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="form-group box-search" ng-if="ctrl.type=='PTT'">
+                            <label
+                                class="col-xs-12 col-sm-offset-4 col-sm-2 col-md-2 col-lg-offset-2 col-lg-2 control-labe">
+                                Search by : </label>
+                            <!-- <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
+                                <input type="radio" name="search_emp" checked> ID
+                            </div>
+                            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
+                                <input type="radio" name="search_emp"> Name
+                            </div> -->
+                        </div>
+
+                        <div class="clearfix" ng-if="ctrl.type=='PTT'"></div>
+
+                        <div class="form-group box-search" ng-if="ctrl.type=='PTT'">
+                            <div class="col-xs-8 col-sm-offset-4 col-sm-6 col-md-6 col-lg-offset-2 col-lg-8"><input
+                                    type="text" class="form-control" ng-model="ctrl.searchCriteria" placeholder="ID" name="search" value="">
+                            </div>
+                            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                                <button class="btn-info bt-search" ng-click="ctrl.search()" type="button">Search</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 col-md-4 col-lg-2 control-labe text-right"  ng-if="ctrl.type!='PTT'"> ID <span class="required-red">*</span>:
+                            </label>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-4" ng-class="{'has-error':ctrl.submitted&&ctrl.model.Code==''}"  ng-if="ctrl.type!='PTT'">
+                                <input type="text" class="form-control"
+                                    ng-class="{'has-error':ctrl.submitted&&ctrl.model.Code==''}"
+                                    ng-readonly="ctrl.model.Code!=''&&ctrl.type=='PTT'"
+                                    placeholder="" ng-model="ctrl.model.Code" name="ID" value="">
+                                <div class="help-block with-errors"
+                                    ng-if="ctrl.submitted&&ctrl.model.Code==''">
+                                    ID is required</div>
+
+                            </div>
+                       
+                            <label class="col-xs-12 col-sm-4 col-md-4 col-lg-2 control-labe text-right"> First Name <span class="required-red">*</span>:
+                            </label>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-4" ng-class="{'has-error':ctrl.submitted&&ctrl.model.FNAME==''}">
+                                <input type="text" class="form-control"
+                                    ng-class="{'has-error':ctrl.submitted&&ctrl.model.FNAME==''}"
+                                    ng-readonly="ctrl.model.Code!=''&&ctrl.type=='PTT'"
+                                    placeholder="" ng-model="ctrl.model.FNAME" name="Name" value="">
+                                <div class="help-block with-errors"
+                                    ng-if="ctrl.submitted&&ctrl.model.FNAME==''">
+                                    First Name is required</div>
+
+                            </div>
+
+                            <label class="col-xs-12 col-sm-4 col-md-4 col-lg-2 control-labe text-right"> Last Name <span class="required-red">*</span>:
+                            </label>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-4" ng-class="{'has-error':ctrl.submitted&&ctrl.model.LNAME==''}">
+                                <input type="text" class="form-control"
+                                    ng-class="{'has-error':ctrl.submitted&&ctrl.model.LNAME==''}"
+                                    ng-readonly="ctrl.model.Code!=''&&ctrl.type=='PTT'"
+                                    placeholder="" ng-model="ctrl.model.LNAME" name="LastName" value="">
+                                <div class="help-block with-errors"
+                                   
+                                    ng-if="ctrl.submitted&&ctrl.model.LNAME==''">
+                                    Last Name is required</div>
+                            </div>
+                      
+                            <label class="col-xs-12 col-sm-4 col-md-4 col-lg-2 control-labe text-right"> Department <span class="required-red">*</span>:
+                            </label>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-4" ng-class="{'has-error':ctrl.submitted&&ctrl.model.unitabbr==''}">
+                                <input type="text" ng-model="ctrl.model.unitabbr"  class="form-control" placeholder="" name="Department" value="" 
+                                    ng-readonly="ctrl.model.Code!=''&&ctrl.type=='PTT'"
+                                    ng-class="{'has-error':ctrl.submitted&&ctrl.model.unitabbr==''}"
+                                    >
+                                <div class="help-block with-errors"
+                                    
+                                     ng-if="ctrl.submitted&&ctrl.model.unitabbr==''">
+                                     Department is required</div>
+                            </div>
+
+                            <label class="col-xs-12 col-sm-4 col-md-4 col-lg-2 control-labe text-right"> E-Mail <span class="required-red">*</span>:
+                            </label>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-4"  ng-class="{'has-error':ctrl.submitted&&ctrl.model.EmailAddr==''}">
+                                <input type="text" ng-model="ctrl.model.EmailAddr" class="form-control" name="Companymail" value=""  ng-class="{'has-error':ctrl.submitted&&ctrl.model.EmailAddr==''}" ng-readonly="ctrl.model.Code!=''&&ctrl.type=='PTT'">
+                                <div class="help-block with-errors"
+                                    
+                                ng-if="ctrl.submitted&&ctrl.model.EmailAddr==''">
+                                Email is required</div>
+                            </div>
+                       
+                            
+
+                            <label class="col-xs-12 col-sm-4 col-md-4 col-lg-2 control-labe text-right"> Status :
+                            </label>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-4">
+                                <select class="form-control" name="status"
+                                    ng-model="ctrl.model.status">
+                                    <option ng-repeat="x in ctrl.status" value="{{x}}" class="black">{{x}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="clearfix h20"></div>
+
+                    </div>
+
+                    <input type="hidden" value="addUser" name="action">
+                    <div class="center">
+                        <button ng-click="ctrl.saveCorperate()"  ng-if="!ctrl.processing" class="bt-save">
+                             Save</button>
+                            <button ng-click="ctrl.saveCorperate()"
+                                ng-if="ctrl.processing" class="bt-save">
+                            <i  class="fa fa-spinner fa-spin"></i> Save</button>
+                        <button type="button" ng-click="ctrl.goto('CorperateList')" class="bt-clear">Cancel</button>
+                    </div>
+                    <div class="h30"></div>
+
+                </div>
+                <!--widget-inbox-->
+            </div>
+            <!--widget-box-->
+
+        </div>
+        
+    </form>
+
+    <div class="h30"></div>
+
+    
+    <script type="text/ng-template" id="search-user.html">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" ng-click="close()">&times;</span>
+            </button>
+            <h4 class="modal-title" id="ModalLabel">รายชื่อ</h4>
+        </div>
+        <div class="modal-body" id="modal-body-editor">
+            <div class="form-box" ng-if="!loading && users.length > 0">
+                <div class="form-group">
+                    <div class="col-sm-3"><strong>รหัส</strong></div>
+                    <div class="col-sm-6"><strong>ชื่อ สกุล</strong></div>
+                    <!-- <div class="col-sm-3"><strong>สกุล</strong></div> -->
+                    <div class="col-sm-3 text-center"><strong>เลือก</strong></div>
+                    <div class="cleaner"></div>
+                </div>
+                <div class="form-group" ng-repeat="u in users">
+                    <div class="col-sm-3">{{u.userID}}</div>
+                    <div class="col-sm-6">{{u.firstName}} {{u.lastName}}</div>
+                    <!-- <div class="col-sm-3">{{u.lastName}}</div> -->
+                    <div class="col-sm-3 text-center">
+                        <button type="button" class="btn-primary bt-choose" ng-click="selectUser(u)">
+                            <i class="fa fa-check-circle"></i> เลือก
+                        </button>
+                    </div>
+                    <div class="cleaner"></div>
+                </div>
+            </div>
+            <div class="form-box" ng-if="loading">
+                <div style="text-align<span class="required-red">*</span>: left">
+                    <img src="svg-loaders/oval.svg" width="30" alt=""> please wait..
+                </div>
+                <div class="cleaner"></div>
+            </div>
+            <div class="form-box" ng-if="!loading && users.length == 0">
+                <div class="form-group">
+                    <div class="col-sm-3"><strong>รหัส</strong></div>
+                    <div class="col-sm-6"><strong>ชื่อ สกุล</strong></div>
+                    <!-- <div class="col-sm-3"><strong>สกุล</strong></div> -->
+                    <div class="col-sm-3 text-center"><strong>เลือก</strong></div>
+                    <div class="cleaner"></div>
+                </div>
+                <div class="col-sm-12">No data found.</div>
+                <div class="cleaner"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="bt-clear" ng-click="close()">Close</button>
+        </div>
+    </script>
+</div>
+<!--main-content-->

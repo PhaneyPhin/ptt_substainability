@@ -1,0 +1,48 @@
+
+<!-- Filter box Component -->
+<div class="form-filters" *ngIf="!isLoading">
+
+  <div class="form-group">
+
+    <img src="assets/images/icon-filters.png" class="img-fluid">
+
+    <button class="btn btn-default dropdown-toggle tg" type="button" id='filterItem' data-toggle="collapse"
+      data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+      aria-label="Toggle navigation">
+    </button>
+    <div class="dropdown-menu-right dropdown-menu navbarNavDropdown" id="navbarNavDropdown" (click)="refreshSearch()">
+      <form class="form-horizontal"  role="form" [hidden]="loading">
+        <p>Categories</p>
+        <div class="form-group">
+            <div id="selectcontain">
+                <select name="name_will_become_class" class="select_item" multiple="multiple" placeholder=" select"  class="selectpicker search-box-sel-all">
+                    <ng-container *ngFor="let item of category">
+                        <option [value]="item.id">{{item.name}}</option>
+                        <ng-container *ngFor="let sub of item.downloadSubCategorys">
+                          <option [value]="sub.id">&nbsp; -{{(sub.name && sub.name.length > 15)? (sub.name | slice:0:15)+'..':(sub.name)}}</option>
+                        </ng-container>
+                      </ng-container>
+              </select>
+            </div>
+       
+        </div>
+
+        <div class="cleaner"></div>
+        <hr />
+        <p>Start :</p>
+        <input type="text" name="daterange" class="Filters form-control" required value="" autocomplete="off" />
+        <p>End :</p>
+        <input type="text" name="daterange" class="Filters1 form-control" required value="" autocomplete="off" />
+        <div class="text-center">
+          <button type="button" class="bt-search" (click)="search()">  <!-- Function-->
+            <i class="fa fa-spinner fa-xs fa-spin" aria-hidden="true" *ngIf="searching"></i>
+            Search
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+<div class="cleaner"></div>

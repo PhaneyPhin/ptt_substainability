@@ -1,0 +1,44 @@
+<div class="col-12">
+  <div class="cleaner"></div>
+  <div class="box-topic">
+    <div class="col-12 font-navy">
+      <strong>Search Result "{{ data.searchText }}" Found {{ data.total }} Items</strong>
+      <div class="cleaner h10"></div>
+    </div>
+  </div>
+  <div class="cleaner"></div>
+
+  <div class="row mx-0 box-report-data box-scrollbar">
+
+    <div class="col-12 text-center" [hidden]="!loading">
+      <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+    </div>
+
+    <div class="col-12 mb-2" *ngFor="let item of data.contents" [hidden]="loading">
+      <a href="javascript:void(0)" (click)="go(item)">
+        <div class="row mx-0 p-2 box-search box-app2">
+          <div class="col-12">
+            <strong class="font-navy font-topic">{{ item.topic }}</strong>
+            <div class="cleaner"></div>
+            <div>
+              <span>{{item.categoryTypeName}} > {{item.categoryName}}</span>
+              <span *ngIf="item.subCategoryName"> > {{item.subCategoryName}}</span>
+            </div>
+            <div class="cleaner"></div>
+            <div class="date-training font-date mt-3">{{item.documentDate | thDate | date:'dd/MM/yyyy'}}
+            </div>
+          </div>
+        </div>
+        <div class="cleaner h10"></div>
+        <hr />
+      </a>
+    </div>
+  </div>
+</div>
+<div class="box-page box-page-1" [hidden]="data.total <= data.pageSize">
+
+  <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+    [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+  </ngb-pagination>
+
+</div>

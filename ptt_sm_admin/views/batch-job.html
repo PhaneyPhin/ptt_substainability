@@ -1,0 +1,65 @@
+<!--main-content-->
+<script type="text/javascript">
+    if (typeof app === 'undefined') {
+        document.location.href = "index.html";
+    }
+</script>
+<style>
+    th {
+        white-space: nowrap;
+    }
+</style>
+<div ng-controller="batchCtrl as ctrl" ng-show="ctrl.canView || ctrl.canEdit" class="container">
+    <div class="h10"></div>
+    <div class="title">Monitor Batch </div>
+    <ol class="breadcrumb margin0">
+        <li><i class="fa-home"></i> <a href="">Monitor Batch</a></li>
+    </ol>
+
+
+    <div class="h10"></div>
+
+
+    <div id="searchresult" class="scroll-x">
+        <table id="DataTableList" class="table table-bordered product-list sorting">
+            <thead>
+                <tr>
+
+                    <th>ID</th>
+                    <th>Batch Name</th>
+                    <th>Batch Path</th>
+                    <th>Run</th>
+                    <th>Last Running</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="ctrl.batchjobs.length == 0">
+                    <td colspan="10">No data found</td>
+                </tr>
+                <tr ng-repeat="r in ctrl.batchjobs" ng-if="ctrl.batchjobs.length > 0">
+
+                  
+                    <td align="center">
+                        {{r.id}}
+                    </td>
+                    <td align="center">
+                       {{r.batch_name}}
+                    </td>
+                    <td>
+                        {{r.batch_path}}
+                    </td>
+                    <td class="text-center">
+                       <span class="bt-save" style="cursor: pointer;" ng-click="ctrl.runBatch(r.batch_path)">Run</button>
+                    </td>
+                    <td>
+                        {{r.lasted_running | date:'d MMM yyyy HH:mm'}}
+                    </td>
+            
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!--main-content-->

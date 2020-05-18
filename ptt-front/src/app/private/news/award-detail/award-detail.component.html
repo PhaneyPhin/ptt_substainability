@@ -1,0 +1,59 @@
+<div class="box-topic">
+  <a href="" (click)="false">News</a>
+  <strong class="active"> > {{data.categoryName}}</strong>
+</div>
+<div>
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+  <div class="title-award">
+    {{data.announceDate | thDate | date:'dd/MM/yyyy'}}
+    <br>
+    <strong>{{ data.topic }}</strong>
+  </div>
+  <div class="cleaner"></div>
+  <!-- <div class="imglarge-award">
+    <img [src]="data.thumbnail" class="img-fluid">
+  </div> -->
+  <!-- <div class="imglarge-award" *ngIf="firstImage != null">
+    <a [href]="firstImage.filePath" data-fancybox="gallery-large" [attr.data-caption]="firstImage.fileName">
+      <img [src]="firstImage.filePath" class="img-fluid">
+    </a>
+  </div> -->
+                        
+  <div *ngIf="data.description" class="text-view-award" [innerHTML]="data.description | safeHtml">
+
+  </div>
+  <div class="h10"></div>
+  <div id="thumbs-wrapper">
+    <div id="thumbs">
+
+      <a [href]="item.filePath" data-fancybox="gallery" [attr.data-caption]='item.fileName'
+        *ngFor="let item of data.images;let i = index">
+        <img [src]="item.filePath">
+      </a>
+
+      <div class="cleaner h20"></div>
+    </div>
+    <!--thumbs-->
+    <a id="prev" href="#"></a>
+    <a id="next" href="#"></a>
+  </div>
+
+
+  <div class="cleaner h30"></div>
+
+  <a href="javascript:void(0)" (click)="downloadFile()">
+    <div class="all-download-img">
+      <img src="assets/images/icon-download.png" [hidden]="downloading" class="img-fluid" />
+      <span [hidden]="!downloading"><i class="fa fa-xs fa-spinner fa-spin" aria-hidden="true"></i></span> Download All
+      Image
+    </div>
+  </a>
+  <a (click)="location.back()">
+      <div class="all-download-img" style="cursor: pointer; float: left;">
+          <i class="fa fa-arrow-left" aria-hidden="true" style="padding-top:5px;"></i> 
+        Back
+      </div>
+    </a>
+</div>

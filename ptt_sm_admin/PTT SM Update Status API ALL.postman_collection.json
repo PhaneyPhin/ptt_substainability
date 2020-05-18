@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "41419750-86d9-4ada-88e4-636f873eda3e",
+		"name": "PTT SM Update Status API ALL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UpdateStatusApplication",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNwNjEwMDQ4Iiwicm9sZSI6IlVzZXIiLCJBY2Nlc3NHcm91cElEIjoiMSIsIklEIjoiNjUiLCJuYmYiOjE1NzI3OTQ0MjcsImV4cCI6MTU3Mjg4MDgyNywiaWF0IjoxNTcyNzk0NDI3fQ.8EH4DMuw9w1hAJ1-N7kE3aC1xwAAZoQ5bcPOokavBJw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"status\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/application/updateStatusApplications",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"application",
+						"updateStatusApplications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateStatusNews",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNwNjEwMDQ4Iiwicm9sZSI6IlVzZXIiLCJBY2Nlc3NHcm91cElEIjoiMSIsIklEIjoiNjUiLCJuYmYiOjE1NzI3OTQ0MjcsImV4cCI6MTU3Mjg4MDgyNywiaWF0IjoxNTcyNzk0NDI3fQ.8EH4DMuw9w1hAJ1-N7kE3aC1xwAAZoQ5bcPOokavBJw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"status\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/news/updateStatusNews",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"news",
+						"updateStatusNews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateStatusPolicy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNwNjEwMDQ4Iiwicm9sZSI6IlVzZXIiLCJBY2Nlc3NHcm91cElEIjoiMSIsIklEIjoiNjUiLCJuYmYiOjE1NzI3OTQ0MjcsImV4cCI6MTU3Mjg4MDgyNywiaWF0IjoxNTcyNzk0NDI3fQ.8EH4DMuw9w1hAJ1-N7kE3aC1xwAAZoQ5bcPOokavBJw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"status\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/policy/updateStatusPolicy",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"policy",
+						"updateStatusPolicy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateStatusDocument",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNwNjEwMDQ4Iiwicm9sZSI6IlVzZXIiLCJBY2Nlc3NHcm91cElEIjoiMSIsIklEIjoiNjUiLCJuYmYiOjE1NzI3OTQ0MjcsImV4cCI6MTU3Mjg4MDgyNywiaWF0IjoxNTcyNzk0NDI3fQ.8EH4DMuw9w1hAJ1-N7kE3aC1xwAAZoQ5bcPOokavBJw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"status\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/download/updateStatusDocument",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"download",
+						"updateStatusDocument"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateStatusReportConfig",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNwNjEwMDQ4Iiwicm9sZSI6IlVzZXIiLCJBY2Nlc3NHcm91cElEIjoiMSIsIklEIjoiNjUiLCJuYmYiOjE1NzI3OTQ0MjcsImV4cCI6MTU3Mjg4MDgyNywiaWF0IjoxNTcyNzk0NDI3fQ.8EH4DMuw9w1hAJ1-N7kE3aC1xwAAZoQ5bcPOokavBJw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"report_id\":1,\n\t\"status\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/report/updateStatusReportConfig",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"report",
+						"updateStatusReportConfig"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateStatusFAQs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNwNjEwMDQ4Iiwicm9sZSI6IlVzZXIiLCJBY2Nlc3NHcm91cElEIjoiMSIsIklEIjoiNjUiLCJuYmYiOjE1NzI3OTQ0MjcsImV4cCI6MTU3Mjg4MDgyNywiaWF0IjoxNTcyNzk0NDI3fQ.8EH4DMuw9w1hAJ1-N7kE3aC1xwAAZoQ5bcPOokavBJw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"status\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/faqs/updateStatusFAQs",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"faqs",
+						"updateStatusFAQs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateStatusPermission",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InNwNjEwMDQ4Iiwicm9sZSI6IlVzZXIiLCJBY2Nlc3NHcm91cElEIjoiMSIsIklEIjoiNjUiLCJuYmYiOjE1NzI3OTQ0MjcsImV4cCI6MTU3Mjg4MDgyNywiaWF0IjoxNTcyNzk0NDI3fQ.8EH4DMuw9w1hAJ1-N7kE3aC1xwAAZoQ5bcPOokavBJw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"status\":\"Active\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pttgwebtest4.pttgrp.com/PTT-SMPortal_test/admin/service/api/permission/updateStatusPermission",
+					"protocol": "https",
+					"host": [
+						"pttgwebtest4",
+						"pttgrp",
+						"com"
+					],
+					"path": [
+						"PTT-SMPortal_test",
+						"admin",
+						"service",
+						"api",
+						"permission",
+						"updateStatusPermission"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

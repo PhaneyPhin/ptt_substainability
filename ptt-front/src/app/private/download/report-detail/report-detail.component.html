@@ -1,0 +1,54 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">Download <strong class="active">&gt; {{ currentCategory?.name }} </strong></div>
+  </div>
+  <div class="col-12 col-md-4">
+    <filter-box (searchCallback)="searchCallback($event)" [emptyCategory]="true"></filter-box>
+  </div>
+</div>
+
+
+<div class="cleaner"></div>
+<div class="row">
+  <div class="col-12 text-center" *ngIf="loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+  <div class="col-12 col-md-12 font-topic d-flex align-items-center">
+    <div class="col-12 px-0">
+      <div class="circle circle-{{(data.subCategoryID%2)+1}}" [ngStyle]="{borderColor: currentCategory.color?currentCategory.color: 'gray' }"></div> <strong> {{ data.subCategoryName }} </strong>
+    </div>
+  </div>
+</div>
+
+<div class="row"><!-- box-report-data-->
+
+  <div class="cleaner"></div>
+  <div class="col-12 col-sm-6 col-md-4" *ngFor="let d of data.documents" [hidden]="loading">
+    <div class="all-training">
+      <a href="javascript:void(0)">
+        <div class="img-training">
+          <img [src]="d.thumbnail" class=" img-fluid">
+          <div class="download-training" (click)="downloadFile(d)"> Download</div>
+        </div>
+      </a>
+      <div class="text-training">
+        <p>
+          {{ d.documentName }}
+        </p>
+        <div class="date-training">{{d.documentDate | thDate | date:'dd/MM/yyyy'}}</div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!--row-->
+
+<div class="cleaner h30"></div>
+<div class="box-page box-page-1">
+
+  <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+    [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+  </ngb-pagination>
+
+</div>

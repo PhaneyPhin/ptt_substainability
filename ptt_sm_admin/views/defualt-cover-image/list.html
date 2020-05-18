@@ -1,0 +1,100 @@
+<script type="text/javascript">
+    if(typeof app === 'undefined'){
+        document.location.href="index.html";
+    }
+</script>
+<div ng-controller="DefaultCoverImageCtrl as ctrl" ng-show="ctrl.canEdit || ctrl.canView">
+
+    <div class="title"> Default Cover Images <ul class="tool">
+            <!--<li><button class="bt-clear"><i class="fa-trash"></i> Delete</button></li>
+            	<li><button class="bt-save">บันทึก</button></li>-->
+        </ul>
+    </div>
+    <ol class="breadcrumb margin0">
+        <li><i class="fa-home"></i> <a href="" ng-click="ctrl.goto('Dashboard')">Home</a></li>
+        <li><i class="fa-comments-o"></i> <a href=""> Default Cover Images </a></li>
+    </ol>
+
+
+    <div class="h10"></div>
+
+
+    <div id="searchresult" class="scroll-x">
+        
+        <div>
+            <table id="DataTableList" class="table table-bordered product-list sorting">
+                <thead>
+                    <tr>
+
+                        
+                        <th width="40%">
+                            Thumbnail
+                        </th>
+                        <th width="40%">
+                            Menu
+                        </th>
+                        <th width="10%">edit</th>
+                        <th width="10%">download</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-if="ctrl.criteria.results.length == 0">
+                        <td colspan="4">No data found</td>
+                    </tr>
+                    <tr ng-repeat="r in ctrl.criteria.results" ng-if="ctrl.criteria.results.length > 0" ng-class="{'warning': r.selected}">
+                       
+                       
+                        <td align="center">
+                            <img src="{{r.thumbnail}}" width="100%" ng-if="r.thumbnail!=null"/>
+                
+                        </td>
+                        <td>
+                            {{r.menu}}
+                        </td>
+                        <td class="text-center" align='center'><a href="" ng-class="!ctrl.canEdit? 'disabled' : ''"
+                            class="bt-edit" ng-click="ctrl.goto('EditCoverImage',r)"><i class="fa-pencil"></i>
+                            Edit</a></td>
+                        <td class="text-center" align='center'><a href="{{r.thumbnail}}" ng-class="!ctrl.canEdit? 'disabled' : ''"
+                                class="bt-save" ng-if="r.thumbnail!=null" ng-click="ctrl.goto('EditDashboardReport',r)" download><i class="fa-download"></i>
+                                Download</a></td>
+                        
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <ul class="records-info records-info-bottom">
+        <li> </li> <a class="bt-prev" href="" ng-click="ctrl.previousPage()"><i class="fa-caret-left"></i></a> <input type="text" size="3" ng-model="ctrl.criteria.pageNumber"
+            disabled="">
+        <a href=""
+            class="bt-next" ng-click="ctrl.nextPage()"><i class="fa-caret-right"></i></a> From {{ctrl.totalPage}} pages
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li> Item per page
+            <select class="show-rec-no" ng-model="ctrl.criteria.pageSize" ng-change="ctrl.changePageSize()" ng-options="x for x in ctrl.pageSizes">
+            </select> Rows </li>
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li>All <strong>{{ctrl.criteria.total}}</strong> items</li>
+    </ul>
+
+    <div class="tool-bottom col-xs-12">
+        <ul>
+            <!--<li><button class="bt-save">บันทึก</button></li>-->
+            <li><button class="bt-clear" ng-show="ctrl.showDelete" ng-click="ctrl.deleteContacts()"><i class="fa-trash"></i> Delete</button></li>
+        </ul>
+    </div>
+
+    <script type="text/ng-template" id="confirm-delete.html">
+        
+        <div class="modal-body" id="modal-body-editor">
+            หากต้องการลบ กรุณายืนยันอีกครั้ง
+        </div>
+        <div class="modal-footer">
+            <button class="bt-confirm" ng-click="submit()" type="button">OK</button>
+            <button class="" ng-click="close()" type="button">Cancel</button>
+        </div>
+    </script>
+</div>
+<!--main-content-->

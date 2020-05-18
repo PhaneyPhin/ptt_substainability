@@ -1,0 +1,79 @@
+<div class="box-topic">
+    Dashboard <span class="active">> {{name}}</span>
+  </div>
+  <div class="h20"></div>
+  <div class="col-12 text-center" [hidden]="!loading">
+      <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+    </div>
+  <div class="row" *ngIf="data.reports.length>0&&!loading">
+    <div class="col-6  font-subtopic font-weight-bold">
+        <div class="circle-navy-blue"></div>&nbsp;<span class="dashName"></span>
+
+    </div>
+    <div class="col-6 font-subtopic font-weight-bold" style="text-align: right;">
+        วันที่ปรับปรุงข้อมูลล่าสุด <span id="due_date"></span>
+    </div>
+    <!--<div class="col-12 col-md-6 text-right font-subtopic font-weight-bold">วันที่ปรับปรุงข้อมมูลล่าสุด <span class="dashDate">20/09/2019</span></div>-->
+  </div>
+
+  <div class="row justify-content-center" *ngIf='data.reports.length>0&&!loading'>
+
+
+    <div class="h30"></div>
+
+    <div class="col-11">
+
+
+        <div id="carousel-wrapper">
+            <div id="carousel">
+                <a  *ngFor="let item of data.reports;let i = index"  [href]="item.path" [attr.id]="i" [attr.rel]="i" data-fancybox="gallery"><img
+                  [src]="item.path" class="img-responsive"></a>
+            </div>
+        </div>
+
+
+        <div class="h30"></div>
+
+        <div class="font-subtopic">
+            <div class="font-weight-bold" style="margin-top:-10px">ช่วงวันที่ <span id="start_date"></span></div>
+            <div id="report_description">
+
+            </div>
+            <div class="  font-subtopic" style="padding:2px" id="tableau_URL">
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="h30"></div>
+
+
+
+
+    <div class="col-12">
+
+
+
+
+        <div id="thumbs-wrapper">
+            <div id="thumbs">
+                <a *ngFor="let item of data.reports;let i = index" href="#{{i}}"  [attr.data-name]="item.report_Name" [attr.data-index]="i"
+                [attr.data-duedate]="item.due_date" [attr.data-start_date]="item.start_date + ' - ' + item.end_date" [attr.data-description]="item.description" [attr.data-tableau_URL]="item.tableau_URL"><img
+                        [src]="item.path"></a>
+
+            </div>
+            <a id="prev" href="#"></a>
+            <a id="next" href="#"></a>
+        </div>
+
+        <div class="h30"></div>
+
+
+
+    </div>
+
+
+
+
+  </div>

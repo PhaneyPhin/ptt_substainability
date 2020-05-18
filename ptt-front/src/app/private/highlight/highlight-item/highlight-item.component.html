@@ -1,0 +1,51 @@
+<div class="row" *ngFor="let d of data;let i = index">
+  <div class="col-12 d-flex align-items-center">
+    <div class="d-block font-subtopic font-weight-bold">
+      <div class="circle-{{ color[i] }}"></div> {{ d.categoryName }}
+    </div>
+  </div>
+  
+  <div class="col-12 col-md-4" *ngFor="let item of d.data">
+    <a href="javascript:void(0)" (click)="goDetailView(d,item)">
+      <div class="row mx-0 box-border-home justify-content-center box-hover-{{ color[i] }}-home">
+        
+        <div class="col-5 col-md-5 py-2 px-2">
+          <div class="box-img-home">
+            <ng-container *ngIf="item.thumbnail; else elseTemplate;">
+              <img [src]="item.thumbnail" class="w-100">
+            </ng-container>
+            <ng-template #elseTemplate>
+              <ng-container>
+                <!-- <img [src]="getImage('/assets/cover_default/announcement.png')"
+                  *ngIf="item.categoryName === 'Announcement'" class="w-100">
+                <img [src]="getImage('/assets/cover_default/award.png')"
+                  *ngIf="item.categoryName === 'Award and Achievement'" class="w-100">
+                <img [src]="getImage('/assets/cover_default/award.png')"
+                  *ngIf="item.categoryName === 'Activities and Gallery'" class="w-100"> -->
+                  
+                  <img [src]="'assets/cover_default/announcement.png'" *ngIf="checkIsCategoryAnnouncement(item.categoryID)"
+                    class="w-100">
+                  <img [src]="'assets/cover_default/award.png'" *ngIf="item.categoryID === awardCategoryID"
+                    class="w-100">
+                  <img [src]="'assets/cover_default/activityandgallery.png'" *ngIf="item.categoryID === activityCategoryID"
+                    class="w-100">
+              </ng-container>
+            </ng-template>
+          </div>
+        </div>
+        <div class="col-6 col-md-6 py-2 px-2 box-text-home max-4">
+          {{ item.topic  }}
+        </div>
+        <div class="col-1 col-md-1 px-0 box-{{ color[i] }}-home d-flex align-items-center">
+          <div class="col-12 px-0 text-center"><i class="fas fa-chevron-right"></i></div>
+        </div>
+
+      </div>
+    </a>
+  </div>
+  <div class="col-12 text-right" *ngIf="data.length>0">
+    <a href="javascript:void(0)" (click)="goListView(d)">
+      <div class="readmore">Read More <i class="fas fa-angle-double-right"></i></div>
+    </a>
+  </div>
+</div>

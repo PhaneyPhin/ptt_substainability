@@ -1,0 +1,119 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">
+      Contact Us <span class="active"> > Contact Form </span>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <!-- <filter-box></filter-box> -->
+  </div>
+</div>
+<div class="cleaner h30"></div>
+
+
+<div class="row justify-content-center  contact-form">
+  <div class="col-12 col-sm-6">
+    <div class="row mx-0">
+      <div class="col-1 px-0"><img src="assets/images/contact-address.png"></div>
+      <div class="col-11">
+        PTT Public Company Limited : 
+        <br>555 Vibhavadi Rangsit Road,
+        <br>Chatuchak, Bangkok 10900 Thailand
+      </div>
+      <div class="col-1 px-0"><img src="assets/images/contact-mobile.png"></div>
+      <div class="col-11">
+        Tel : 0-2537-2000
+      </div>
+      <div class="col-1 px-0"><img src="assets/images/contact-fax.png"></div>
+      <div class="col-11">
+        Fax : 0-2537-2471
+      </div>
+    </div>
+
+    <div class="cleaner h30"></div>
+    <img src="assets/images/contact-map.png" class="img-fluid">
+    <div class="cleaner h20"></div>
+    <a href="https://www.google.com/maps/place/PTT+Head+Office+%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88+%E0%B8%9B%E0%B8%95%E0%B8%97./@13.8175949,100.557022,16z/data=!4m5!3m4!1s0x0:0x817f06348db4e36a!8m2!3d13.8179812!4d100.5575234?hl=th-TH" target="_blank"><svg class="svg-inline--fa fa-map-marker-alt fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="map-marker-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg><!-- <i class="fas fa-map-marker-alt"></i> --> View google maps </a>
+  </div>
+
+  <div class="col-12 col-sm-6">
+    <form class="box-border-form bv-form"  name="form" (ngSubmit)="onSubmit(f.form)" #f="ngForm" novalidate autocomplete="off">
+      <fieldset>
+        <div class="col-sm-12">
+          <div class="form-group form-group-line" [ngClass]="name.invalid && (name.dirty || name.touched || submited) ? 'has-feedback has-error' : ''">
+            <img src="assets/images/contact-user.png">
+            <input name="name" id="name" placeholder="Name" type="text" [(ngModel)]="data.FullName" #name="ngModel"
+              required>
+            <div *ngIf="name.invalid && (name.dirty || name.touched || submited)" class="error">
+              <div *ngIf="name.errors.required">
+                *Required field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group form-group-line" [ngClass]="email.invalid && (email.dirty || email.touched || submited) ? 'has-feedback has-error' : ''">
+            <img src="assets/images/contact-email.png">
+            <input name="email" id="email" placeholder="E-mail" type="email" [(ngModel)]="data.Email" #email="ngModel"
+              email required>
+            <div *ngIf="email.invalid && (email.dirty || email.touched || submited)" class="error">
+              <div *ngIf="email.errors.required">
+                  *Required field.
+              </div>
+              <div *ngIf="email.errors.email">
+                  *Email address is not a valid.
+              </div>
+            </div>
+          </div>
+          <div class="form-group form-group-line"><img src="assets/images/contact-tel.png">
+            <input name="telephone" placeholder="Tel." type="text" [(ngModel)]="data.PhoneNumber" #telephone="ngModel">
+            <!-- <div *ngIf="telephone.invalid && (telephone.dirty || telephone.touched || submited)" class="error">
+              <div *ngIf="telephone.errors.required">
+                  *Required field.
+              </div>
+            </div> -->
+          </div>
+
+          <div class="form-group" [ngClass]="subjectTypeID.invalid && (subjectTypeID.dirty || subjectTypeID.touched || submited) ? 'has-feedback has-error' : ''">
+            <img src="assets/images/contact-comment.png">
+            <select [disabled]="loadSubj" [(ngModel)]="data.SubjectTypeID" name="subjectTypeID" id="subjectTypeID"
+              #subjectTypeID="ngModel" required>
+              <option selected disabled [value]="null">
+                Subject
+              </option>
+              <option *ngFor="let item of subjects" [value]="item.id">{{item.title}}</option>
+            </select>
+            <!-- <div class="cleaner"></div> -->
+            <div *ngIf="subjectTypeID.invalid && (subjectTypeID.dirty || subjectTypeID.touched || submited)"
+              class="error">
+              <div *ngIf="subjectTypeID.errors.required">
+                  *Required field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="message.invalid && (message.dirty || message.touched || submited) ? 'has-feedback has-error' : ''">
+            <img src="assets/images/contact-text.png">
+            <textarea class="form-control" name="message" id="message" placeholder="Message" rows="3" #message="ngModel"
+              required [(ngModel)]="data.Detail"></textarea>
+            <div class="cleaner"></div>
+            <div *ngIf="message.invalid && (message.touched || submited)" class="error">
+              <div *ngIf="message.errors.required">
+                  *Required field.
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <button type="reset" class="btn-send" id="btnclear" (click)="submited = fase" [disabled]="loading">Clear </button>
+            </div>
+            <div class="col-6">
+              <button class="btn-send " [disabled]="loading">Send </button>
+            </div>
+          </div>
+          <div class="cleaner h10"></div>
+
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+</div>

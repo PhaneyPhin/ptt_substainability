@@ -1,0 +1,52 @@
+<!-- <div class="row">
+  <div class="col-12 col-md-8 d-flex">
+    <div class="box-topic">About SM <strong class="active"> > SM Vision and Mission </strong></div>
+  </div>
+</div>
+<div class="cleaner h30"></div>
+<div class="row mx-0 justify-content-center box-border-line font-subtopic">
+  <div class="col-12 col-sm-4 d-flex align-items-center border-right">
+    <div class="text-center col-12">
+      <strong>VISION ของ
+        <br>สายงานบริหารความยั่งยืน </strong>
+    </div>
+  </div>
+  <div class="col-12 col-sm-8 py-2 d-flex align-items-center">
+    คือ To be the Trusted Professional Strategic Partner in Sustainability Management
+    หรือแปลเป็นไทยว่า "คู่คิดธุรกิจให้เติบโตอย่างยั่งยืนในทุกสถานการณ์" เพื่อตอบสนอง VISION
+    ดังกล่าว จึงมี กลยุทธ์ 6 ข้อ เพื่อยกระดับการบริหารจัดการความยั่งยืนของ กลุ่ม ปตท. ดังนี้
+  </div>
+  <div class="line-color-1 h10"></div>
+</div>
+<div class="cleaner h30"></div>
+
+
+<div class="row box-article  font-subtopic">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+
+  <div class="col-12 col-md-6 mb-5" *ngFor="let item of data;let i = index" [hidden]="loading">
+    <div class="px-0">
+      <div class="{{ i % 2 === 0 ? 'circle-green' : 'circle-blue' }}"></div> <strong> {{ item.title }}</strong>
+    </div>
+
+    <div class="mx-0 {{ i % 2 === 0 ? 'box-strategic-green' : 'box-strategic-blue' }} px-3 py-3 font-subtopic"
+      [innerHTML]="item.content  | safeHtml">
+
+    </div>
+  </div>
+
+</div> -->
+<div class="row ">
+  <div class="col-12 col-md-12 d-flex ">
+    <div class="box-topic">About SM <strong class="active"> > {{data.title}} </strong></div>
+  </div>
+</div>
+<div class="cleaner h30"></div>
+<div class="row box-article  font-subtopic">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+</div>
+<div [innerHTML]="data.content | safeHtml"></div>

@@ -1,0 +1,218 @@
+<!--main-content-->
+<script type="text/javascript">
+    if(typeof app === 'undefined'){
+        document.location.href="index.html";
+    }
+</script>
+<div ng-controller="PolicyCtrl as ctrl" ng-show="ctrl.canView || ctrl.canEdit">
+
+    <div class="title"> Dashboard Monitor </div>
+    <ol class="breadcrumb margin0">
+        <li><i class="fa-home"></i> <a href="" ng-click="ctrl.goto('Dashboard')">Home</a></li>
+        <li><i class="fa-file-text-o"></i> <a href="" ng-click="ctrl.goto('AllPolicies')"> Dashboard Monitor</a></li>
+        <li class="active"><i class="fa-list"></i> All Dashboard Monitor </li>
+    </ol>
+
+
+    <div class="h10"></div>
+    <div class="alert alert-info list-search" role="alert">
+        <form name="frmSearch" id="frmSearch" method="POST" ng-submit="ctrl.search(true)">
+            <input name="no-pg" type="hidden" value="10" />
+            <i class="fa-file-text-o"></i> <strong> Log Type </strong> : <select>
+                <option>Add</option>
+            </select>
+            &nbsp;|&nbsp;
+            <i class="fa-sitemap"></i> <strong>Dashboard Name</strong> :
+           <input type="text"/>
+            &nbsp;|&nbsp;
+            <strong><i class="fa-calendar-alt"></i> Tableau Workbook Name </strong> :
+            <select>
+                <option>Workbook1</option>
+            </select>
+            
+            <strong><i class="fa-calendar-alt"></i>  Start Date </strong> :
+            <input type="text" datepicker ng-readonly="true" style="background:white;" name="search_docdate_start"
+                ng-model="ctrl.criteria.dateFrom">
+                <strong><i class="fa-calendar-alt"></i>  End Date </strong> :
+                <input type="text" datepicker ng-readonly="true" style="background:white;" name="search_docdate_start"
+                    ng-model="ctrl.criteria.dateFrom">
+                <strong><i class="fa-calendar-alt"></i> Status </strong> :
+                <select>
+                    <option>Active</option>
+                    <option>Not Active</option>
+                </select>
+                
+            <!-- <input type="text" name="search_docdate_start"  datepicker ng-readonly="true" style="background:white;" name="search_docdate_start" ng-model="ctrl.criteria.dateFrom"> - <input type="text" name="search_docdate_end"
+                datepicker ng-readonly="true" style="background:white;" ng-model="ctrl.criteria.dateTo"> &nbsp;|&nbsp; -->
+            <div class="cleaner h10"></div>
+           
+            <button class="bt-search" type="submit"><strong><i class="fa-search"></i> Search</strong></button>
+            <button class="bt-search" ng-click="ctrl.clearSearch()"><strong><i class="fa-times"></i> Clear</strong></button>
+        </form>
+    </div>
+    <div class="h10"></div>
+
+    <ul class="records-info" ng-show="ctrl.canEdit">
+        <li><a href=""  ng-click="ctrl.goto('DashbaordReportCategory')"><button class="btn btn-info">Add Dashboard Monitor </button></a> &nbsp; </li>
+    </ul>
+
+    <div id="searchresult"  class="scroll-x">
+        <table id="DataTableList" class="table table-bordered product-list sorting">
+            <thead>
+                <tr>
+                    <th width="2%"><input type="checkbox" name="all-product" id="all-product"
+                        class="css-checkbox" ng-click="ctrl.toggleAll()" ng-model="ctrl.isAllSelected"><label for="all-product" class="css-label"></label></th>
+                    <th width="7%">
+                        <a ng-click="ctrl.sort_by('n.[Priority]');">No.
+                            <span ng-show="ctrl.criteria.sortingOrder == 'n.[Priority]'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'n.[Priority]'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th width="10%">
+                        <a ng-click="ctrl.sort_by('c.[Name]');">Dashboard Name
+                            <span ng-show="ctrl.criteria.sortingOrder == 'c.[Name]'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'c.[Name]'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th width="25%">
+                        <a ng-click="ctrl.sort_by('n.Topic');">Tableau Workbook Name
+                            <span ng-show="ctrl.criteria.sortingOrder == 'n.Topic'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'n.Topic'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th width="10%">
+                        <a ng-click="ctrl.sort_by('n.DocumentDate');">Due Date
+                            <span ng-show="ctrl.criteria.sortingOrder == 'n.DocumentDate'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'n.DocumentDate'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('n.[Counter]');">Process Date
+                            <span ng-show="ctrl.criteria.sortingOrder == 'n.[Counter]'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'n.[Counter]'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>Message Log</th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('n.Active');">Frequency
+                            <span ng-show="ctrl.criteria.sortingOrder == 'n.Active'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'n.Active'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>Log Type</th>
+                    <th>Status</th>
+                    <th>Refresh</th>
+                    <th>Clevel</th>
+                    <th>SEVP</th>
+                    <th>EVP</th>
+                    <th>VP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="ctrl.criteria.results.length == 0">
+                    <td colspan="9">No data found</td>
+                </tr>
+                <tr ng-repeat="(index,r) in ctrl.criteria.results" ng-if="ctrl.criteria.results.length > 0" ng-class="{'warning': r.selected}">
+                    <td>
+                        <input type="checkbox" name="{{r.id}}" id="{{r.id}}" class="chk_del css-checkbox"
+                        ng-model="r.selected" ng-change="ctrl.optionToggled()">
+                        <label for="{{r.id}}" class="css-label"></label>
+                    </td>
+                    <td align="center">
+                            <select name="selPriority" ng-disabled="!ctrl.canEdit"
+                            class="form-control select-sort"
+                            ng-model="r.priority" ng-change="ctrl.updatePolicyPriority(r.id, r.priority)" ng-options="x for x in r.priorities"></select>
+                    </td>
+                    <td align="center">
+                        {{"report "+(index+1)}}
+                        <div class="cleaner"></div>
+                    </td>
+                    <td align="center">
+                        Workbook1
+                    </td>
+                    <td align="center">06/09/2019</td>
+                    <td align="center">
+                        Weekly
+                    </td>
+                    <td align="center">
+                        <div>add one field</div>
+                    </td>
+                     <td align="center">
+                        <div>add one field</div>
+                    </td>
+                    <td align="center">
+                            Weekly
+                    </td>
+                    <td align='center'>Active</td>
+                    <td align="center"><button class="bt-search" type="submit"><strong><i class="fa-refresh"></i> </strong></button></td>
+                    <td align='center'>Weekly</td>
+                    <td align='center'>Monthly</td>
+                    <td align='center'>Weekly</td>
+                    <td align='center'>Yearly</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="records-info records-info-bottom">
+        <li> </li> <a class="bt-prev" href="" ng-click="ctrl.previousPage()"><i class="fa-caret-left"></i></a> <input
+            type="text" size="3" ng-model="ctrl.criteria.pageNumber" disabled="">
+        <a href="" class="bt-next" ng-click="ctrl.nextPage()"><i class="fa-caret-right"></i></a> From {{ctrl.totalPage}}
+        pages
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li> Item per page
+            <select class="show-rec-no" ng-model="ctrl.criteria.pageSize" ng-change="ctrl.changePageSize()"
+                ng-options="x for x in ctrl.pageSizes">
+            </select> Rows </li>
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li>All <strong>{{ctrl.criteria.total}}</strong> items</li>
+    </ul>
+
+    <div class="tool-bottom col-xs-12" ng-show="ctrl.canEdit">
+        <ul>
+            <li><button class="bt-clear" ng-show="ctrl.showDelete" ng-click="ctrl.deletePolicies()" id="bt-clear"><i class="fa-trash"></i> Delete </button></li>
+        </ul>
+    </div>
+    <script type="text/ng-template" id="confirm-delete.html">
+        
+        <div class="modal-body" id="modal-body-editor">
+            หากต้องการลบ กรุณายืนยันอีกครั้ง
+        </div>
+        <div class="modal-footer">
+            <button class="bt-confirm" ng-click="submit()" type="button">OK</button>
+            <button class="" ng-click="close()" type="button">Cancel</button>
+        </div>
+    </script>
+</div>
+<!--main-content-->

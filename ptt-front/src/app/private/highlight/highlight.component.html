@@ -1,0 +1,80 @@
+<div class="col-12 text-center" [hidden]="!loading">
+  <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+</div>
+<div class="box-topic" *ngIf="data.reports.length>0&&!loading"><span class="active"> Dashboard </span></div>
+<div class="h20"></div>
+<div class="row" *ngIf="data.reports.length>0&&!loading">
+  <div class="col-12 col-md-6 font-subtopic font-weight-bold">
+    <div class="circle-navy-blue" [style.border-color]="cireclecolor"></div>&nbsp;<span class="dashName"></span>
+  </div>
+  <div class="col-12 col-md-6 text-right font-subtopic font-weight-bold">วันที่ปรับปรุงข้อมูลล่าสุด <span
+      class="dashDate"></span></div>
+</div>
+
+<div class="row justify-content-center" *ngIf="data.reports.length>0&&!loading">
+
+
+  <div class="h30"></div>
+
+  <div class="col-11">
+
+
+    <div id="carousel-wrapper">
+      <div id="carousel">
+        <a *ngFor="let item of data.reports;let i=index" [href]="item.path" [attr.id]="i" [attr.rel]="i"
+          data-fancybox="gallery">
+          <img [src]="item.path" class="img-responsive"></a>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div id="thumbs-wrapper">
+      <div id="thumbs">
+        <a *ngFor="let item of data.reports;let i=index" href="#{{i}}" class="report{{i}}" [attr.data-index]="i"
+          [attr.data-name]="item.report_Name" [attr.data-date]="item.due_date"><img [src]="item.path"></a>
+
+      </div>
+      <a id="prev" href="#"></a>
+      <a id="next" href="#"></a>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">
+      <span class="active"> Hightlight </span>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <!-- <filter-box (searchCallback)="searchCallback($event)"></filter-box> -->
+  </div>
+</div>
+<highlight-item [data]="data.highlights" [hidden]="loading"></highlight-item>
+
+<div class="box-topic" [hidden]="loading">
+  <span class="active"> New Update </span>
+</div>
+<div class="cleaner"></div>
+
+<div class="row mx-0 box-border-news-home" [hidden]="loading">
+
+  <ng-container *ngFor="let d of data.newUpdates">
+    <div class="col-md py-2 px-2 border-right box-news-home" *ngFor="let item of d.data" (click)="go(item)">
+      <a href="javascript:void(0)">
+        <div class="row mx-0">
+          <div class="col-2 col-md-12 col-xl-2 px-0 text-center">
+            <!-- <img src="assets/images/icon-home-2.png" class="img-fluid"> -->
+            <i class="fa fa-folder-open"></i>
+          </div>
+          <div class="col-10 col-md-12 col-xl-10 px-2 font-weight-bold">
+            {{ item.title }}
+          </div>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+
+</div>
+<!--row-->

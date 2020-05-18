@@ -1,0 +1,256 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">Download <strong class="active">&gt; {{category?.name}} </strong></div>
+  </div>
+  <div class="col-12 col-md-4">
+    <filter-box (searchCallback)="searchCallback($event)"></filter-box>
+  </div>
+</div>
+<div *ngIf="usageLayout == 'DISPLAY_1'">
+  <!--form-filters-->
+  <div class="cleaner"></div>
+  <div class="row">
+    <div class="col-12 text-center" *ngIf="loading">
+      <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+    </div>
+    <ng-container *ngIf="!loading">
+      
+      <div class="col-12 col-sm-6 col-md-4" *ngIf="data.documents.length <= 0">
+        <p style="white-space: nowrap;" [hidden]="loading">{{nodata}}</p>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of data.documents">
+        <div class="all-magazine">
+          <a href="javascript:void(0)" (click)="downloadFile(item)">
+            <div class="img-magazine">
+              <img *ngIf="item.thumbnail" [src]="item.thumbnail" class="img-fluid img-custom">
+              <div class="click-magazine"> Click</div>
+            </div>
+          </a>
+          <div class="text-magazine" [ngStyle]="{background: item.color ? item.color : '#3db049'}">
+            <div class="name-magazine">
+              <a href="javascript:void(0)" (click)="downloadFile(item)">{{item.documentName}}</a>
+            </div>
+            <div class="date-magazine">
+              {{item.documentDate | thDate | date:'dd/MM/yyyy'}} 
+            
+            </div>
+            <div class="cleaner"></div>
+          </div>
+          <!--text-magazine-->
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  
+  <!--row-->
+  <div class="cleaner h30"></div>
+  <div class="box-page box-page-1">
+
+    <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+      [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+    </ngb-pagination>
+  </div>
+</div>
+
+<div *ngIf="usageLayout == 'DISPLAY_2'">
+  <div class="cleaner"></div>
+  <div class="row">
+    <div class="col-12 text-center" *ngIf="loading">
+      <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+    </div>
+    <div class="cleaner"></div>
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let d of data.documents" [hidden]="loading">
+      <div class="all-training">
+        <a href="javascript:void(0)">
+          <div class="img-training">
+            <img [src]="d.thumbnail" class=" img-fluid">
+            <div class="download-training" (click)="downloadFile(d)"> Download</div>
+          </div>
+        </a>
+        <div class="text-training">
+          <p>
+            {{ d.documentName }}
+          </p>
+          <div class="date-training">{{d.documentDate | thDate | date:'dd/MM/yyyy'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4" *ngIf="data.documents.length <= 0">
+        <p style="white-space: nowrap;" [hidden]="loading">{{nodata}}</p>
+      </div>
+  </div>
+  <!--row-->
+  <div class="cleaner h30"></div>
+  <div class="box-page box-page-1">
+    <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+      [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+    </ngb-pagination>
+  </div>
+</div>
+
+<div *ngIf="usageLayout == 'DISPLAY_3'">
+  <div class="cleaner"></div>
+  <div class="row">
+    <div class="col-12 text-center" *ngIf="loading">
+      <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+    </div>
+    <div class="col-12 col-sm-6 px-2 box-ebill-list" *ngFor="let item of data.documents" [hidden]="loading">
+      <a (click)="downloadFile(item)" href="javascript:void(0)">
+        <div class="row mx-0 p-2 app-border-line box-ebill" [ngStyle]="{'color': item.color?item.color: 'black'}"
+          (mouseover)="item.hover=true" (mouseleave)="item.hover=false">
+          <div class="col-2 d-flex align-items-center box-app-border-left"
+            [ngStyle]="{'color': item.hover ? 'white':''}">
+            <i *ngIf="currentCategory.icon" [class]="currentCategory.icon"></i>
+            <img *ngIf="currentCategory.iconImagePath" [src]="currentCategory.iconImagePath" />
+          </div>
+          <div class="col-10 name-app d-flex align-items-center">
+            {{ item.documentName }}
+          </div>
+        </div>
+        <div class="cleaner h10"></div>
+      </a>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4" *ngIf="data.documents == null || data.documents.length === 0">
+      <p style="white-space: nowrap;" [hidden]="loading">{{nodata}}</p>
+    </div>
+  </div>
+  <!--row-->
+  <div class="cleaner h30"></div>
+  <div class="box-page box-page-1">
+
+    <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+      [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+    </ngb-pagination>
+  </div>
+</div>
+
+
+<div *ngIf="usageLayout == 'DISPLAY_5'">
+  <div class="cleaner"></div>
+  <div class="row">
+    <div class="col-12 text-center" *ngIf="loading">
+      <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+    </div>
+    <ng-container *ngFor="let item of subdata;let i = index">
+      <br />
+      <div class="col-12 col-md-8 font-topic d-flex align-items-center" *ngIf="item.subCategoryID && item.subCategoryID != 0">
+        <div class="col-12 px-0">
+          <div class="circle circle-{{ i % 2 + 1 }}" [ngStyle]="{borderColor: item.color?item.color: 'gray' }"></div> <strong> {{item.subCategoryName}} </strong>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 d-flex align-items-center"  *ngIf="item.subCategoryID && item.subCategoryID != 0">
+        <a [routerLink]="['/home/download/detail/'+item.subCategoryID]">
+          <div class=" readmore">Read More >> </div>
+        </a>
+      </div>
+      <div class="cleaner"></div>
+      <div class="col-12 col-sm-6 col-md-4" *ngFor="let d of item.documents">
+        <div class="all-training">
+          <a href="javascript:void(0)">
+            <div class="img-training">
+              <img [src]="d.thumbnail" class="img-fluid img-custom">
+              <div class="download-training" (click)="downloadFile(d)">Download</div>
+            </div>
+          </a>
+          <div class="text-training">
+            <p>
+              {{ d.documentName }}
+            </p>
+            <div class="date-training">{{d.documentDate | thDate | date:'dd/MM/yyyy'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4" *ngIf="item.documents == null || item.documents.length === 0">
+        <p style="white-space: nowrap;" *ngIf="!loading">No data found.</p>
+      </div>
+      <div class="cleaner"></div>
+    </ng-container>
+    <div class="row" *ngIf="subdata == null || subdata.length === 0">
+        <div class="col-12 col-sm-6 col-md-12">
+          <p style="white-space: nowrap;" *ngIf="!loading">No data found.</p>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="usageLayout == 'DISPLAY_4'">
+  <div class="cleaner"></div>
+  <div class="row">
+    <div class="col-12 text-center" *ngIf="loading">
+      <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+    </div>
+    <ng-container *ngIf="!loading">
+
+      <div class="col-12 col-md-6 col-xl-4" *ngFor="let item of data.documents">
+
+        <div class="row mx-0 box-border-target">
+          <div class="vdo" *ngIf="item.youtubeURL || item.videoURL">
+            <a class="vdo_link" *ngIf="item.youtubeURL" data-fancybox="iframe" [href]="item.parsedYoutubeURL"></a>
+            <iframe width="100%" height="auto" *ngIf="item.youtubeURL" [src]="item.parsedYoutubeURL" frameborder="0"
+              gesture="media" allowfullscreen>
+            </iframe>
+            <video width="100%" height="auto" *ngIf="item.videoURL" controls class="myVideo">
+              <source [src]="item.videoURL" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="vdo" *ngIf="!item.youtubeURL && !item.videoURL">
+              <video width="100%" height="auto" controls class="myVideo">
+                <source src="" type="video/mp4">
+              </video>
+          </div>
+
+          <a href="javascript:void(0)" *ngIf="item.youtubeURL"
+            class="bt-download"
+            [ngStyle]="{background: item.color ? item.color : '#007dbd'}">Download
+          </a>
+          <a href="javascript:void(0)" (click)="downloadFile(item)"
+            *ngIf="item.videoURL"
+            class="bt-download"
+            [ngStyle]="{background: item.color ? item.color : '#007dbd'}">Download
+          </a>
+          <a href="javascript:void(0)" (click)="downloadFile(item)"
+            *ngIf="!item.youtubeURL && !item.videoURL"
+            class="bt-download"
+            [ngStyle]="{background: item.color ? item.color : '#007dbd'}">Download
+          </a>
+
+          <div class="col-12" *ngIf="item.youtubeURL || item.videoURL">
+            <a data-fancybox="iframe" *ngIf="item.youtubeURL" [href]="item.parsedYoutubeURL">
+              <div class="font-bold line-clamp-2">
+                {{ item.documentName }}
+              </div>
+            </a>
+            <a href="javascript:void(0)" *ngIf="item.videoURL">
+              <div class="font-bold line-clamp-2">
+                {{ item.documentName }}
+              </div>
+            </a>
+            <div class="font-date">{{item.documentDate | thDate | date:'dd/MM/yyyy'}}</div>
+          </div>
+
+          <div class="col-12" *ngIf="!item.youtubeURL && !item.videoURL">
+              <a href="javascript:void(0)">
+                <div class="font-bold line-clamp-2">
+                  {{ item.documentName }}
+                </div>
+              </a>
+              <div class="font-date">{{item.documentDate | thDate | date:'dd/MM/yyyy'}}</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4" *ngIf="data.documents == null || data.documents.length === 0">
+        <p style="white-space: nowrap;" *ngIf="!loading">{{nodata}}</p>
+      </div>
+    </ng-container>
+  </div>
+  <!--row-->
+  <div class="cleaner h30"></div>
+  <div class="box-page box-page-1">
+    <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+      [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+    </ngb-pagination>
+  </div>
+</div>

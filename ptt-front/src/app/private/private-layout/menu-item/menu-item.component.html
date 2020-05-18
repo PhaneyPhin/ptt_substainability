@@ -1,0 +1,16 @@
+<ng-container>
+  <div class="box-sub-menu" *ngIf="data && items.length>0">
+
+    <div class="menu-sub" *ngFor="let item of items;let i = index">
+      <div class="img-menu" data-id="4">
+        <a (click)="goto(item)">
+          <div class="box-icon">
+            <i [class]="item.icon" [ngStyle]="{color:'#1f196e'}"></i>
+            <div class="text-menu-sub">{{ item.name }}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  </ng-container>

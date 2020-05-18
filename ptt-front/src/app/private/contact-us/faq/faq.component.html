@@ -1,0 +1,71 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">
+      Contact Us <span class="active"> > FAQs </span>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <!-- <filter-box (searchCallback)="searchCallback($event)" [emptyCategory]="true"></filter-box> -->
+  </div>
+</div>
+<div class="cleaner h30"></div>
+<div class="row justify-content-center">
+  <div class="col-12 col-sm-12 font-subtopic">
+    <img src="assets/images/icon-topic-color.png"> Help Topics
+    <div class="cleaner h20"></div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+  <div class="col-12 col-sm-12 font-subtopic" [hidden]="loading">
+
+    <!--accordition-->
+    <div id="accordion" class="faq">
+      <div class="card" *ngFor="let item of data.faQs;let i = index">
+        <div class="card-header {{ i !== 0 ? 'collapsed' : '' }} " data-toggle="collapse"
+          [attr.data-target]="'#collapse'+item.id" [attr.aria-expanded]="i===0" (click)="addFAQsCounter(item.id)"
+          [attr.aria-controls]="'collapse'+item.id">
+          <div class="row mx-0">
+            <div class="col-2 col-md-1 bg-icon-faqs d-flex align-items-center">
+              <div class="col-12 px-0 text-center"><img src="assets/images/icon-faqs.png"></div>
+            </div>
+            <div class="col-8 col-md-10 py-2 d-flex align-items-center">
+              {{ item.question }}
+            </div>
+            <div class="col-2 col-md-1 d-flex align-items-center">
+              <div class="icon-faq">
+                <i *ngIf="i===0" class="fas fa-minus"></i>
+                <i *ngIf="i!==0" class="fas fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div [id]="'collapse'+item.id" class="collapse {{i===0 ? 'show':''}}" data-parent="#accordion">
+          <div class="card-body">
+              <!-- box-scrollbar -->
+            <div class="">
+              {{ item.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--card-->
+    </div>
+    <!--accordition-->
+
+
+  </div>
+
+  <!-- <div class="box-page box-page-1">
+
+    <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+      [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+    </ngb-pagination>
+
+  </div> -->
+</div>

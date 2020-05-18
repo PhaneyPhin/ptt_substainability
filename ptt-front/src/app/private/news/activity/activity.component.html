@@ -1,0 +1,57 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">News <strong class="active"> > {{categoryName}} </strong></div>
+  </div>
+  <div class="col-12 col-md-4">
+    <filter-box (searchCallback)="searchCallback($event)"></filter-box>
+  </div>
+</div>
+<!--form-filters-->
+
+<div class="cleaner"></div>
+<div class="row">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+
+  <div class="col-12 col-sm-6" *ngFor="let item of data.news" [hidden]="loading">
+
+    <div class="all-activities">
+      <div class="img-activities">
+        <a [routerLink]="['/home/news/activities-detail/'+item.id]">
+          <ng-container *ngIf="item.thumbnail; else elseTemplate">
+            <img [src]="item.thumbnail" class="w-100">
+          </ng-container>
+          <ng-template #elseTemplate>
+            <img [src]="'assets/cover_default/activityandgallery.png'" class="w-100">
+          </ng-template>
+        </a>
+      </div>
+      <div class="all-text-activities" [ngStyle]="{background: color }">
+        <div class="row">
+          <div class="col-sm-7 text-activities">
+            <a [routerLink]="['/home/news/activities-detail/'+item.id]" data-toggle="tooltip"
+              data-placement="top" [title]="item.topic">
+              {{item.topic}}
+            </a>
+          </div>
+          <div class="col-sm-5 text-right">{{item.announceDate | thDate | date:'dd/MM/yyyy'}}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-12 col-sm-6" *ngIf="data.news == null || data.news.length == 0" [hidden]="loading">
+      <p>No data found.</p>
+  </div>
+
+</div>
+<!--row-->
+
+<div class="box-page box-page-1">
+
+  <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+    [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+  </ngb-pagination>
+
+</div>

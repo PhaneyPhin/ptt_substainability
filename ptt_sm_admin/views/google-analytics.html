@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    if(typeof app === 'undefined'){
+        document.location.href="index.html";
+    }
+</script>
+<div ng-controller="GoogleAnalyticsCtrl as ctrl" ng-show="ctrl.canViewGoogleAnalytics">
+    <div class="title"> Google Analytics
+    </div>
+    <ol class="breadcrumb margin0">
+        <li><i class="fa-home"></i> <a href="" ng-click="ctrl.goto('Dashboard')">Home</a></li>
+        <li><i class="fa-newspaper-o"></i> <a href="" ng-click="ctrl.goto('AllNews')"> Google Analytics </a></li>
+    </ol>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="widget-box-turquoise">
+                <div class="widget-title" lang="th"><i class="fa-cubes"></i> Google Analytics</div>
+                <ul class="widget-tool navbar-right">
+                    <li><i class="fa-caret-up show-hide-widget"></i></li>
+                </ul>
+                <div class="widget-inbox">
+                        User: smportal.ptt@gmail.com<br/>
+                        Password: Smportal@2019 <br/>
+                        สามารถเรียกดูได้ที่ Link : <a href="https://analytics.google.com/analytics/web/#/report-home/a145923431w207727140p200371356" target="_blank">https://analytics.google.com/analytics/web/#/report-home/a145923431w207727140p200371356</a>
+                </div>
+            </div>
+    </div>
+    <!-- <div style="padding:20px">
+        
+    </div> -->
+
+   
+</div>

@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-12">
+   
+    <ng-container *ngFor="let item of data">
+
+      <div class="row mx-0">
+
+        <div class="col-12 font-topic" [ngStyle]="{color: item.applications[0].color }">
+          <div class="circle circle-2" [ngStyle]="{borderColor: item.applications[0].color }"></div><strong>
+            {{item.categoryName}}</strong>
+        </div>
+        <div class=" cleaner h10"></div>
+      </div>
+
+      <div class="row mx-0 mb-5">
+        <div class="col-12 col-sm-6 mb-2" *ngFor="let a of item.applications">
+          <a (click)="goToLink(a.systemURL, a.id)" (mouseover)="a.hover=true" (mouseleave)="a.hover=false">
+            <div class="row mx-0 p-2 app-border-line app-me box-app2"
+              [ngStyle]="{backgroundColor: a.hover===true  ? a.color : '' }">
+              <div class="col-2 d-flex align-items-center">
+                <i [class]="a.icon"></i>
+              </div>
+              <div class="col-10 d-flex align-items-center">
+                {{ a.systemName }}
+              </div>
+            </div>
+            <div class="cleaner h10"></div>
+          </a>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+</div>

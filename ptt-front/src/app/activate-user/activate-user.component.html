@@ -1,0 +1,43 @@
+<div class="col-6 col-sm-3">
+  <img src="assets/images/login-left.png" class="img-fluid">
+</div>
+<div class="all-login">
+  <div class="container-fluid">
+    <div class="row justify-content-md-center">
+      <div class="col-sm-9 col col-lg-7">
+        <div class="bg-login text-center ">
+          <div class="logo-login">
+            <img src="assets/images/logo-menu.png">
+          </div>
+          <div class="title-form" *ngIf="checking">
+            <span>
+              <i class=" fa fa-spinner fa-spin" aria-hidden="true"></i>
+              Checking Activation.
+            </span>
+          </div>
+          <div *ngIf="!checking && success">
+            <div class="title-form">
+              Your account are activated. Please login.
+            </div>
+            <div class="col-12 text-center">
+              <button type="button" class="btn btn-submit col-6" [routerLink]="['/public/login']">
+                Login
+              </button>
+            </div>
+          </div>
+          <div *ngIf="!checking && !success">
+            <div class="title-form">
+              Your activate link are expired. Please register agian.
+            </div>
+            <div class="col-12 text-center">
+              <button type="button" class="btn btn-submit col-6" [routerLink]="['/public/register']">
+                Register
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="cleaner"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+<div class="row justify-content-md-center">
+  <div class="col-sm-9 col-lg-7 col-xl-5">
+    <div class="bg-login">
+      <form name="form" (ngSubmit)="onSubmit(f.form)" #f="ngForm" novalidate autocomplete="off">
+        <div class="logo-login"><img src="assets/images/logo-menu.png"></div>
+        <div class="title-form"> Register</div>
+        <div class="form-register">
+          <div class="row">
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="firstName.invalid && (firstName.dirty || firstName.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-user2.png" class="icon-regis">
+                <input type="text" placeholder="First Name" [(ngModel)]="data.FirstName" name="firstName" id="firstName"
+                  #firstName="ngModel" required>
+
+              </div>
+              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || submited)"
+                 >
+                  <div class="triangle-up"></div>
+                  <div *ngIf="firstName.errors.required"  class="errors">
+                    *Required field.
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="lastName.invalid && (lastName.dirty || lastName.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-user2.png" class="icon-regis">
+                <input type="text" placeholder="Last Name" [(ngModel)]="data.LastName" name="lastName" id="lastName"
+                  #lastName="ngModel" required>
+
+              </div>
+              <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || submited)" >
+                  <div class="triangle-up"></div>
+                  <div *ngIf="lastName.errors.required" class="errors">
+                    *Required field.
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="companyID.invalid && (companyID.dirty || companyID.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-com.png" class="icon-regis icon-regis-1">
+                <select class="form-control company" [disabled]=" loading" [(ngModel)]="data.CompanyID" name="companyID"
+                  id="companyID" #companyID="ngModel" required>
+                  <option selected disabled [value]="null">Company</option>
+                  <option *ngFor="let item of subContractCompanys" [value]="item.id">{{item.name}}</option>
+                </select>
+
+              </div>
+              <div *ngIf="companyID.invalid && (companyID.dirty || companyID.touched || submited)">
+                  <div class="triangle-up"></div>
+                  <div *ngIf="companyID.errors.required"  class="errors">
+                    *Required field.
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="department.invalid && (department.dirty || department.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-deprat.png" class="icon-regis">
+                <input type="text" placeholder="Department" [(ngModel)]="data.Department" name="department"
+                  id="department" #department="ngModel" required>
+
+              </div>
+              <div *ngIf="department.invalid && (department.dirty || department.touched || submited)">
+                  <div class="triangle-up"></div>
+                  <div *ngIf="department.errors.required" class="errors">
+                    *Required field.
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="username.invalid && (username.dirty || username.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-mail.png" class="icon-regis">
+                <input type="email" placeholder="Company-Email" [(ngModel)]="data.Username" name="username"
+                  id="username" #username="ngModel" email required>
+
+              </div>
+              <div *ngIf="username.invalid && (username.dirty || username.touched || submited)">
+                  <div class="triangle-up"></div>
+                  <div *ngIf="username.errors.required" class='errors'>
+                    *Required field.
+                  </div>
+                  <div *ngIf="username.errors.email" class="errors">
+                    The email address is not a valid.
+                  </div>
+                </div>
+            </div>
+            <div class="cleaner"> </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="mobilePhoneNumber.invalid && (mobilePhoneNumber.dirty || mobilePhoneNumber.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-tel.png" class="icon-regis">
+                <input type="text" placeholder="Mobile Number" [(ngModel)]="data.MobilePhoneNumber"
+                  name="mobilePhoneNumber" id="mobilePhoneNumber" #mobilePhoneNumber="ngModel" required>
+
+              </div>
+              <div
+                  *ngIf="mobilePhoneNumber.invalid && (mobilePhoneNumber.dirty || mobilePhoneNumber.touched || submited)">
+                  <div class="triangle-up"></div>
+                  <div *ngIf="mobilePhoneNumber.errors.required" class="errors">
+                    *Required field.
+                  </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="officePhoneNumber.invalid && (officePhoneNumber.dirty || officePhoneNumber.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-tel2.png" class="icon-regis">
+                <input type="text" placeholder="Office Number" [(ngModel)]="data.OfficePhoneNumber"
+                  name="officePhoneNumber" id="officePhoneNumber" #officePhoneNumber="ngModel" required>
+
+              </div>
+              <div
+                  *ngIf="officePhoneNumber.invalid && (officePhoneNumber.dirty || officePhoneNumber.touched || submited)">
+                  <div class="triangle-up"></div>
+                  <div *ngIf="officePhoneNumber.errors.required" class="errors">
+                    *Required field.
+                  </div>
+                </div>
+            </div>
+            <div class="cleaner"> </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="password.invalid && (password.dirty || password.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-key.png" class="icon-regis">
+                <input type="password" autocomplete="off" placeholder="Password" [(ngModel)]="data.Password" name="password" id="password"
+                  (ngModelChange)="textChanged($event)" #password="ngModel" required>
+
+              </div>
+              <div *ngIf="password.invalid && (password.dirty || password.touched || submited);else validTemplate">
+                  <div class="triangle-up"></div>
+                  <div *ngIf="password.errors.required" class="errors">
+                    *Required field.
+                  </div>
+                </div>
+                <ng-template #validTemplate>
+                    <div *ngIf="!password.invalid && passwordError && (password.dirty || password.touched || submited)">
+                        <div class="triangle-up"></div>
+                      <div class="errors"> *Invalid password.</div>
+                    </div>
+                </ng-template>
+
+            </div>
+            <div class="col-12 col-sm-6 col col-lg-6">
+              <div class="form-group"
+                [ngClass]="(confirmPassword.invalid || data.ConfirmPassword !== data.Password) && (confirmPassword.dirty || confirmPassword.touched || submited) ? 'has-feedback has-error' : ''">
+                <img src="assets/images/icon-key.png" class="icon-regis">
+                <input type="password" placeholder="Confirm Password" [(ngModel)]="data.ConfirmPassword"
+                  name="confirmPassword" id="confirmPassword" #confirmPassword="ngModel" required>
+
+              </div>
+              <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched || submited);else passwordTemplate">
+                  <div class="triangle-up"></div>
+                  <div *ngIf="confirmPassword.errors.required" class="errors">
+                    *Required field.
+                  </div>
+                </div>
+                <ng-template #passwordTemplate>
+                    <div
+                    *ngIf="data.ConfirmPassword !== data.Password && (confirmPassword.dirty || confirmPassword.touched || submited)">
+                    <div class="triangle-up"></div>
+                    <div class="errors">
+                        * Password do not match.
+                    </div>
+                  </div>
+                </ng-template>
+
+            </div>
+            <div class="cleaner"></div>
+            <div class="col-12">
+              <div class="text-condition" *ngIf="!regisSuccess">
+                Password must contain at least 8 characters, including Upper/lowercase, <br>
+                number and spacial characters.
+              </div>
+              <div class="text-condition" *ngIf="regisSuccess">
+                Check your E-Mail for activate your account. Please activate account by click the link within 24 hours.
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col col-lg-6" *ngIf="!regisSuccess">
+              <button [disabled]="regis" type="submit" class="btn btn-submit">
+                <img src="assets/images/icon-send.png" class="img-fluid" [hidden]="regis">
+                <span [hidden]="!regis"><i class="fa fa-xs fa-spinner fa-spin" aria-hidden="true"></i></span>
+                Register
+              </button>
+            </div>
+            <div class="col-6 col-sm-6 col col-lg-6" *ngIf="!regisSuccess">
+              <button [disabled]="regis" type="button" class="btn btn-reset" [routerLink]="['/public/login']">
+                Cancel
+              </button>
+            </div>
+            <div class="col-12 text-center" *ngIf="regisSuccess">
+              <button [disabled]="regis" type="button" class="btn btn-reset" [routerLink]="['/public/login']">
+                Cancel
+              </button>
+            </div>
+
+          </div>
+          <!--row-->
+        </div>
+        <!--form-register-->
+
+      </form>
+      <div class="h30"></div>
+    </div>
+  </div>
+</div>

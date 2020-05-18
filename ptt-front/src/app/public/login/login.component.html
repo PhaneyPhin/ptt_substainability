@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+  <div class="col-sm-9 col-lg-5 col-xl-4">
+    <div class="bg-login">
+      <form name="form" (ngSubmit)="onSubmit(f.form)" #f="ngForm" novalidate autocomplete="off">
+        <div class="logo-login"><img src="assets/images/logo-menu.png"></div>
+
+        <div class="form-login">
+          <div class="form-group" [ngClass]="companyID.invalid && (companyID.dirty || companyID.touched || submited) ? 'has-feedback has-error' : ''">
+            <img src="assets/images/icon-com.png" class="icon-login icon-login-1">
+
+            <select class="form-control company" [disabled]="loading" [(ngModel)]="data.CompanyID" name="companyID"
+              (ngModelChange)="companyChange($event)" id="companyID" #companyID="ngModel" required>
+              <!-- <option [value]="'0'">Company</option> -->
+              <option *ngFor="let item of companys" [value]="item.id">{{item.name}}</option>
+            </select>
+
+          </div>
+
+          <div *ngIf="selectedCompany.companyType === 'SUBCONTRACT'">
+            <div class="form-group" [ngClass]="username.invalid && (username.dirty || username.touched || submited) ? 'has-feedback has-error' : ''">
+              <img src="assets/images/icon-user.png" class="icon-login">
+              <input type="email" autocomplete="off" placeholder="Username" [(ngModel)]="selectedCompany.Username" name="username"
+                id="username" #username="ngModel" email required>
+
+            </div>
+            <div *ngIf="username.invalid && (username.dirty || username.touched || submited)" class="error white">
+              <div class="triangle-up"></div>
+                <div *ngIf="username.errors.required" class="errors">
+                  *Required field
+                </div>
+                <div *ngIf="username.errors.email" class="errors">
+                  *Email address is not a valid.
+                </div>
+              </div>
+          </div>
+
+          <div *ngIf="selectedCompany.companyType !== 'SUBCONTRACT'">
+            <div class="form-group" [ngClass]="username.invalid && (username.dirty || username.touched || submited) ? 'has-feedback has-error' : ''">
+              <img src=" assets/images/icon-user.png" class="icon-login">
+              <input type="text" placeholder="Username" autocomplete="off" [(ngModel)]="selectedCompany.Username" name="username"
+                id="username" #username="ngModel" required>
+
+            </div>
+            <div *ngIf="username.invalid && (username.dirty || username.touched || submited)">
+                <div class="triangle-up"></div>
+                <div *ngIf="username.errors.required"  class="errors">
+                    *Required field
+                </div>
+              </div>
+          </div>
+
+          <div class="form-group" [ngClass]="password.invalid && (password.dirty || password.touched || submited) ? 'has-feedback has-error' : ''">
+            <img src="assets/images/icon-key.png" class="icon-login">
+            <input type="password" autocomplete="off" placeholder="Password" [(ngModel)]="data.Password" name="password" id="password"
+              #password="ngModel" required>
+
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched || submited)">
+              <div class="triangle-up"></div>
+              <div *ngIf="password.errors.required" class="errors">
+                  *Required field
+              </div>
+            </div>
+          <div class="cleaner h10"></div>
+          <div class="text-condition-login">
+            <div class="cleaner h10"></div>
+            <div class="font-topic">If no company name on the list, please click on register link.</div>
+            After the registration is successful, you can use the registered
+            <br>Email/Password to access the system by select the company name as "Other".
+          </div>
+          <div class="cleaner h20"></div>
+          <button type="submit" class="btn btn-login" [disabled]="loadLogin || loading">
+            <span [hidden]="!loadLogin"><i class="fa fa-xs fa-spinner fa-spin" aria-hidden="true"></i></span>
+            Login
+          </button>
+
+          <div class="text-forgot">
+            <a href="#" [routerLink]="['/public/register']" routerLinkActive="active">Register</a>
+            <a href="#" [routerLink]="['/public/forgot-password']" routerLinkActive="active">Forgot password </a>
+          </div>
+        </div>
+      </form>
+
+      <div class="cleaner"></div>
+    </div>
+  </div>
+</div>

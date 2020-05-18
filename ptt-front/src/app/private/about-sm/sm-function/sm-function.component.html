@@ -1,0 +1,45 @@
+<!-- <div class="row">
+  <div class="col-12 col-md-8 d-flex">
+    <div class="box-topic">About SM <strong class="active"> > SM Function </strong></div>
+  </div>
+</div>
+<div class="cleaner h30"></div>
+<div class="row justify-content-center">
+  <div class="col-12 font-subtopic">
+    <img src="assets/images/icon-topic-color.png"> สายงานผู้ช่วยกรรมการผู้จัดการใหญ่บริหารความยั่งยืน (ผรญ.)
+    มีหน้าที่ความรับผิดชอบใน 3 งานหลัก ได้แก่
+  </div>
+</div>
+<div class="cleaner h30"></div>
+
+<div class="row box-function-sm">
+
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+
+
+  <div class="col-12 col-md-4 my-2 px-2" [hidden]="loading" *ngFor="let item of data;let i = index">
+    <div class="row mx-0 box-{{ i % 2 === 0 ? 'green' : 'blue' }}">
+      <div class="col-12 my-2">
+        <div class="font-subtopic font-weight-bold py-2">{{item.title}}</div>
+        <div [outerHTML]="item.content | safeHtml">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> -->
+<div class="row ">
+  <div class="col-12 col-md-12 d-flex ">
+    <div class="box-topic">About SM <strong class="active"> > {{data.title}} </strong></div>
+  </div>
+</div>
+<div class="cleaner h30"></div>
+<div class="row box-article  font-subtopic">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+</div>
+<div [innerHTML]="data.content | safeHtml"></div>

@@ -1,0 +1,60 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-8 d-flex align-items-center">
+    <div class="box-topic">News <strong class="active">> {{categoryName}}</strong></div>
+  </div>
+  <div class="col-12 col-md-4">
+    <filter-box (searchCallback)="searchCallback($event)"></filter-box>
+  </div>
+</div>
+
+<div class="cleaner"></div>
+<div class="row">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+  <div class="col-12 col-md-6" *ngFor="let item of data.news" [hidden]="loading">
+    <div class="all-announce">
+      <div class="row">
+        <div class="col-5">
+          <div class="img-announce">
+            <a href="#" [routerLink]="['/home/news/announcements-detail/'+item.id]">
+
+              <ng-container *ngIf="item.thumbnail; else elseTemplate">
+                <img [src]="item.thumbnail" class="w-100">
+              </ng-container>
+              <ng-template #elseTemplate>
+                <img [src]="coverImage" class="w-100">
+              </ng-template>
+
+            </a>
+          </div>
+        </div>
+        <div class="col-7">
+          <div class="text-title-announce">
+            <!-- <div>{{item.announceDate | thDate | date:'dd/MM/yyyy'}}</div> -->
+            <strong><a href="#" [routerLink]="['/home/news/announcements-detail/'+item.id]">{{item.topic}}</a></strong>
+            <div class="cleaner"></div>
+            {{(item.description && item.description.length > 200)? (item.description | slice:0:200)+'..':(item.description)}}
+          </div>
+        </div>
+      </div>
+      <!--row-->
+      <div class="date-announce" [ngStyle]="{background: color }">
+        &nbsp;{{item.announceDate | thDate | date:'dd/MM/yyyy'}}
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-6" *ngIf="data.news == null || data.news.length == 0" [hidden]="loading">
+    <p>No data found.</p>
+  </div>
+</div>
+<!--row-->
+
+<div class="box-page box-page-1">
+
+  <ngb-pagination style="margin: auto" [collectionSize]="data.total" [(page)]="data.pageNumber" [disabled]="loading"
+    [(pageSize)]="data.pageSize" [maxSize]="5" [boundaryLinks]="true" (pageChange)="pageChange($event)">
+  </ngb-pagination>
+
+
+</div>

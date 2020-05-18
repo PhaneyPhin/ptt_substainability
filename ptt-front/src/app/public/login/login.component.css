@@ -1,0 +1,44 @@
+.error{
+    position: absolute;
+    text-align: right;
+    right: 15px;
+    color: red;
+    font-size: 1.4rem;
+    top: 0.2em;
+}
+@media only screen and (max-width: 767px) {
+    .error{
+        top: 4px;
+        right: 28px;
+        font-size: smaller;
+    }
+    .icon-login {
+        float: left;
+        margin-top: 2px;
+        max-height: 25px;
+    }
+    .errors{
+      margin-top:-3px;
+
+    }
+}
+.errors{
+  margin-top: -7px;
+  margin-bottom:13px;
+  color: white;
+  font-size: 1rem;
+  width:100%;
+  background:red;
+  border-radius: 20px;
+  padding:0px;
+  text-align: center;
+}
+.triangle-up {
+	width: 0;
+  height: 0;
+  margin:auto;
+  margin-top: -18px;
+	border-left: 9px solid transparent;
+	border-right: 9px solid transparent;
+	border-bottom: 15px solid red;
+}

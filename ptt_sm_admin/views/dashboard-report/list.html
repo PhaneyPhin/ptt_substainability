@@ -1,0 +1,264 @@
+<!--main-content-->
+<script type="text/javascript">
+    if (typeof app === 'undefined') {
+        document.location.href = "index.html";
+    }
+</script>
+<style>
+    th {
+        white-space: nowrap;
+    }
+</style>
+<div ng-controller="dashboardReportCtrl as ctrl" ng-show="ctrl.canView || ctrl.canEdit">
+
+    <div class="title"> Dashboard Report </div>
+    <ol class="breadcrumb margin0">
+        <li><i class="fa-home"></i> <a href="" ng-click="ctrl.goto('Dashboard')">Home</a></li>
+        <li><i class="fa-file-text-o"></i> <a href="" ng-click="ctrl.goto('AllPolicies')"> Dashboard Report</a></li>
+        <li class="active"><i class="fa-list"></i> All Dashboard Report </li>
+    </ol>
+
+
+    <div class="h10"></div>
+    <div class="alert alert-info list-search" role="alert">
+        <form name="frmSearch" id="frmSearch" method="POST" ng-submit="ctrl.search(true)">
+            <input name="no-pg" type="hidden" value="10" />
+            <i class="fa-file-text-o"></i> <strong> Name </strong> : <input type="text" name="search_title"
+                ng-model="ctrl.search_crieria.ReportName" value="" style="width: 250px !important;">
+            &nbsp;|&nbsp;
+            <strong>Dashboard Report Flag</strong>
+            <select ng-model="ctrl.search_crieria.DashboardReportFlag">
+                <option value="2" selected>All</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            &nbsp;|&nbsp;
+            <strong>Show on Hightlight</strong>
+            <select ng-model="ctrl.search_crieria.ShowOnHighlight">
+                <option value="2" selected>All</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            &nbsp;|&nbsp;
+            <i class="fa-sitemap"></i> <strong>Category</strong> :
+            <select ng-model="ctrl.search_crieria.CategoryID">
+                <option value="">All</option>
+                <option ng-repeat="item in ctrl.categories" value="{{item.id}}">{{item.name}}</option>
+            </select>
+
+            <div class="cleaner h10"></div>
+            <!-- <select id="search_cate" name="search_cate"
+                    ng-model="ctrl.criteria.selectedCategory"
+                    ng-options="option.name for option in ctrl.categories track by option.id">
+            </select> &nbsp;|&nbsp; -->
+            <i class="fa-heart"></i> <strong>Status</strong></strong> :
+            <select ng-model="ctrl.search_crieria.Status">
+                <option value="2" selected>All</option>
+                <option value="1">active</option>
+                <option value="0">inactive</option>
+            </select>
+            &nbsp;|&nbsp;
+            <i class="fa-child"></i> <strong>Permission</strong></strong> :
+            <select ng-model="ctrl.search_crieria.Permission">
+                <option value="">All</option>
+                <option>PTT</option>
+                <option>PTT GROUP</option>
+
+            </select>
+            &nbsp;|&nbsp;
+            <strong>Send Email Flag</strong>
+            <select ng-model="ctrl.search_crieria.SendEmailFlag">
+                <option value="2" selected>All</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            &nbsp;|&nbsp;
+            <button class="bt-search" type="submit" ng-click="ctrl.searchReportConfig()"><strong><i
+                        class="fa-search"></i> Search</strong></button>
+            <button class="bt-search" ng-click="ctrl.clearSearch()"><strong><i class="fa-times"></i>
+                    Clear</strong></button>
+        </form>
+    </div>
+    <div class="h10"></div>
+
+    <ul class="records-info" ng-show="ctrl.canEdit">
+        <li><a href="" ng-click="ctrl.goto('AddDashboardReport')"><button class="btn btn-info">Add Dashboard Report
+                </button></a> &nbsp; </li>
+    </ul>
+
+    <div id="searchresult" class="scroll-x">
+        <table id="DataTableList" class="table table-bordered product-list sorting">
+            <thead>
+                <tr>
+
+                    <th width="2%"><input type="checkbox" name="All-product" id="All-product" class="css-checkbox"
+                            ng-click="ctrl.toggleAll()" ng-model="ctrl.isAllSelected"><label for="All-product"
+                            class="css-label"></label>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('Priority');">No.
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Priority'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Priority'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+
+                        <a ng-click="ctrl.sort_by('Highlight_Priority');"> Highlight No.
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Highlight_Priority'">
+                                <span ng-show="!ctrl.criteria.reverse"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Highlight_Priority'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('Report_Name');">Name
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Report_Name'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Report_Name'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th width="10%">
+                        SM Dashboard
+                    </th>
+                    <th>Show on Hightlight</th>
+                    <th>Send Email</th>
+
+                    <th>
+                        <a ng-click="ctrl.sort_by('Category_ID');">Category
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Category_ID'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Category_ID'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>Status</th>
+
+                    <th width="25%">
+                        Permission
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="ctrl.reportConfigs.length == 0">
+                    <td colspan="10">No data found</td>
+                </tr>
+                <tr ng-repeat="r in ctrl.reportConfigs" ng-if="ctrl.reportConfigs.length > 0">
+
+                    <td class="text-center" width="2%">
+                        <input type="checkbox" name="{{r.report_ID}}" id="{{r.report_ID}}" class="chk_del css-checkbox"
+                            ng-model="r.selected" ng-change="ctrl.optionToggled()">
+                        <label for="{{r.report_ID}}" class="css-label"></label>
+                    </td>
+                    <td align="center">
+                        <select class="form-control select sort" ng-model="r.priority"
+                            ng-change="ctrl.updateReportPriority(r,r.priority)">
+                            <option ng-repeat="item in r.number">{{item}}</option>
+                        </select>
+                        <!-- <pre>{{r.number | json}}</pre> -->
+                        <!-- <select name="selPriority"
+                                    ng-disabled="!ctrl.canEditNews"
+                                    class="form-control select-sort" ng-model="r.priority"
+                                    ng-change="ctrl.updateNewsPriority(r.id, r.priority)"
+                                    ng-options="x for x in r.number"></select> -->
+                    </td>
+                    <td align="center">
+                        <select class="form-control select sort" ng-model="r.highlight_Priority"
+                            ng-change="ctrl.updateHighlight(r,r.highlight_Priority)" ng-if="r.show_On_Highlight=='1'">
+                            <option ng-repeat="item in r.highlightNumber">{{item}}</option>
+                        </select>
+                        <!-- <pre>{{r.number | json}}</pre> -->
+                        <!-- <select name="selPriority"
+                                    ng-disabled="!ctrl.canEditNews"
+                                    class="form-control select-sort" ng-model="r.priority"
+                                    ng-change="ctrl.updateNewsPriority(r.id, r.priority)"
+                                    ng-options="x for x in r.number"></select> -->
+                    </td>
+                    <td class="text-center" width="10%">
+                        {{r.report_Name}}
+                    </td>
+                    <td class="text-center">
+                        <div class="selected-item-green" ng-if="r.send_Report=='1'">Yes</div>
+                        <div class="selected-item-red" ng-if="r.send_Report=='0'">No</div>
+                    </td>
+                    <td class="text-center">
+                        <div class="selected-item-green" ng-if="r.show_On_Highlight=='1'">Yes</div>
+                        <div class="selected-item-red" ng-if="r.show_On_Highlight=='0'">No</div>
+                    </td>
+                    <td class="text-center">
+                        <div class="selected-item-green" ng-if="r.send_Email=='1'">Yes</div>
+                        <div class="selected-item-red" ng-if="r.send_Email=='0'">No</div>
+                    </td>
+
+                    <td class="text-center">{{r.category_Name}}</td>
+                    <td class="text-center">
+                        <div class="publushed" ng-class="{'unpublushed': r.status == '0'}">
+                            <select class="select-publushed chk_show" data-id="24" ng-model="r.status"
+                                ng-change="ctrl.updateStatus(r)">
+                                <option class="black" value="1">Active</option>
+                                <option class="black" value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </td>
+
+                    <td class="text-center">
+                        {{r.permission}}
+                    </td>
+
+                    <td class="text-center" align='center'><a href="" ng-class="!ctrl.canEdit? 'disabled' : ''"
+                            class="bt-edit" ng-click="ctrl.goto('EditDashboardReport',r)"><i class="fa-pencil"></i>
+                            Edit</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="records-info records-info-bottom">
+        <li> </li> <a class="bt-prev" href="" ng-click="ctrl.previousPage()"><i class="fa-caret-left"></i></a> <input
+            type="text" size="3" ng-model="ctrl.criteria.pageNumber" disabled="">
+        <a href="" class="bt-next" ng-click="ctrl.nextPage()"><i class="fa-caret-right"></i></a> From {{ctrl.totalPage}}
+        pages
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li> Item per page
+            <select class="show-rec-no" ng-model="ctrl.criteria.pageSize" ng-change="ctrl.changePageSize()"
+                ng-options="x for x in ctrl.pageSizes">
+            </select> Rows </li>
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li>All <strong>{{ctrl.criteria.total}}</strong> items</li>
+    </ul>
+
+    <div class="tool-bottom col-xs-12" ng-show="ctrl.canEdit">
+        <ul>
+            <li><button class="bt-clear" ng-show="ctrl.showDelete" ng-click="ctrl.delete_report()" id="bt-clear"><i
+                        class="fa-trash"></i> Delete </button></li>
+        </ul>
+    </div>
+    <script type="text/ng-template" id="confirm-delete.html">
+
+        <div class="modal-body" id="modal-body-editor">
+            หากต้องการลบ กรุณายืนยันอีกครั้ง
+        </div>
+        <div class="modal-footer">
+            <button class="bt-confirm" ng-click="submit()" type="button">OK</button>
+            <button class="" ng-click="close()" type="button">Cancel</button>
+        </div>
+    </script>
+</div>
+<!--main-content-->

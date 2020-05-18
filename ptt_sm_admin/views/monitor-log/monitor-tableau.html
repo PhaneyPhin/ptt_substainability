@@ -1,0 +1,305 @@
+<!--main-content-->
+<script type="text/javascript">
+    if (typeof app === 'undefined') {
+        document.location.href = "index.html";
+    }
+</script>
+<style>
+    th {
+        white-space: nowrap;
+    }
+</style>
+<div ng-controller="monitorLog as ctrl" ng-show="ctrl.canView || ctrl.canEdit">
+
+    <div class="title">Monitor Tableau </div>
+    <ol class="breadcrumb margin0">
+        <li><i class="fa-home"></i> <a href="" ng-click="ctrl.goto('Dashboard')">Home</a></li>
+        <li><i class="fa-file-text-o"></i> <a href="">Monitor Tableau</a></li>
+        <li class="active"><i class="fa-list"></i> Monitor Tableau </li>
+    </ol>
+
+
+    <div class="h10"></div>
+    <div class="alert alert-info list-search" role="alert">
+        <form name="frmSearch" id="frmSearch" method="POST" ng-submit="ctrl.search(true)">
+            <input name="no-pg" type="hidden" value="10" />
+            <i class="fa-file-text-o"></i> <strong> Log Type </strong> : <select ng-model="ctrl.criteria.LogType">
+                <option value="">All</option>
+                <option>Generate Dashboard for Email</option>
+                <option>Generate Dashboard for SM</option>
+            </select>
+            &nbsp;|&nbsp;
+            <i class="fa-sitemap"></i> <strong>Report Name</strong> :
+            <input type="text" ng-model="ctrl.criteria.ReportName" />
+            &nbsp;|&nbsp;
+            
+            <strong><i class="fa-calendar-alt"></i> Frequency </strong> :
+            <select ng-model="ctrl.criteria.Frequeuncy">
+                <option value="">All</option>
+                <option>Weekly</option>
+                <option>Monthly</option>
+                <option>Quarterly</option>
+                <option>Quartery</option>
+                <option>Yearly</option>
+            </select>
+            &nbsp;|&nbsp;
+            
+            <strong><i class="fa-calendar-alt"></i> Level </strong> :
+            <select ng-model="ctrl.criteria.Display_Level">
+                <option value="">All</option>
+                <option>C Level</option>
+                <option>SEVP</option>
+                <option>EVP</option>
+                <option>VP</option>
+                <option>Corperate</option>
+            </select>
+
+            <div class="cleaner h10"></div>
+            <strong><i class="fa-calendar-alt"></i> Start Date </strong> :
+            <input type="text" datepicker ng-readonly="true" style="background:white;" name="search_docdate_start"
+                ng-model="ctrl.criteria.startDate">
+                &nbsp;|&nbsp;
+            <strong><i class="fa-calendar-alt"></i> End Date </strong> :
+            <input type="text" datepicker ng-readonly="true" style="background:white;" name="search_docdate_start"
+                ng-model="ctrl.criteria.endDate">
+                &nbsp;|&nbsp;
+            <strong><i class="fa-calendar-alt"></i>Current Status </strong> :
+            <select ng-model="ctrl.criteria.Status">
+                <option value="">All</option>
+                <option>Waiting to Process</option>
+                <option>In Progress</option>
+                <option>Tableau Fail</option>
+                <option>Tableau Success</option>
+            </select>
+            &nbsp;|&nbsp;
+            <!-- <input type="text" name="search_docdate_start"  datepicker ng-readonly="true" style="background:white;" name="search_docdate_start" ng-model="ctrl.criteria.dateFrom"> - <input type="text" name="search_docdate_end"
+                    datepicker ng-readonly="true" style="background:white;" ng-model="ctrl.criteria.dateTo"> &nbsp;|&nbsp; -->
+
+
+            <button class="bt-search" type="submit" ng-click="ctrl.SearchReportQueues()"><strong><i
+                        class="fa-search"></i> Search</strong></button>
+            <button class="bt-search" ng-click="ctrl.clearSearch()"><strong><i class="fa-times"></i>
+                    Clear</strong></button>
+        </form>
+    </div>
+    <div class="h10"></div>
+
+
+    <div id="searchresult" class="scroll-x">
+        <table id="DataTableList" class="table table-bordered product-list sorting">
+            <thead>
+                <tr>
+
+                    <th>
+                        No.
+                    </th>
+                    <!-- <th align="center">ID</th> -->
+                    <th>
+
+                        <a ng-click="ctrl.sort_by('Report_Name');">Report Name
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Report_Name'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Report_Name'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th >
+                        <div width="150px">
+                                <a ng-click="ctrl.sort_by('QueueType');" >Log Type
+                                        <span ng-show="ctrl.criteria.sortingOrder == 'QueueType'">
+                                            <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                            <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                                        </span>
+                                        <span ng-show="ctrl.criteria.sortingOrder != 'QueueType'">
+                                            <span> <i class="fa fa-sort"></i></span>
+                                        </span>
+                                    </a>
+                        </div>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('Frequency');">Frequency
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Frequency'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Frequency'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('Display_Level');">Level
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Display_Level'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Display_Level'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('Dashboard_Type');">Dashboard Type
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Dashboard_Type'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Dashboard_Type'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('CreatedDate');">Create Date/Time
+                            <span ng-show="ctrl.criteria.sortingOrder == 'CreatedDate'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'CreatedDate'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('DueDate');">Due Date
+                            <span ng-show="ctrl.criteria.sortingOrder == 'DueDate'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'DueDate'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('ProcessDate');">Process Date/Time
+                            <span ng-show="ctrl.criteria.sortingOrder == 'ProcessDate'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'ProcessDate'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+
+                        <a ng-click="ctrl.sort_by('Finished_Date');">Finished Date/Time
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Finished_Date'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Finished_Date'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="ctrl.sort_by('Status');">Current Status
+                            <span ng-show="ctrl.criteria.sortingOrder == 'Status'">
+                                <span ng-show="ctrl.criteria.reverse=='asc'"> <i class="fas fa-sort-down"></i></span>
+                                <span ng-show="ctrl.criteria.reverse=='desc'"> <i class="fas fa-sort-up"></i></span>
+                            </span>
+                            <span ng-show="ctrl.criteria.sortingOrder != 'Status'">
+                                <span> <i class="fa fa-sort"></i></span>
+                            </span>
+                        </a>
+                    </th>
+                    <th>Message</th>
+                    <th>Detail Generate Dashboard for Email</th>
+                    <th>Re-Process</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="ctrl.reportQueues.length == 0">
+                    <td colspan="14">No data found</td>
+                </tr>
+                <tr ng-repeat="(index,item) in ctrl.reportQueues">
+                    <td align="center">{{index+1}}</td>
+                    <!-- <td align="center">{{item.id}}</td> -->
+                    <td>
+                        <div style="width:150px">{{item.report_Name}}</div>
+                    </td>
+                    <td>
+                        <div style="width:200px">
+                                {{item.queueType}}
+                        </div>
+
+                    </td>
+                    <td>{{item.frequency}}</td>
+                    <td>{{item.display_Level}}</td>
+                    <td>{{item.dashboard_Type}}</td>
+                    <td>{{item.createdDate | date:'d MMM yyyy HH:mm'}}</td>
+                    <td>{{item.dueDate_show | date:'d MMM yyyy'}}</td>
+                    <td>
+                     
+                        <div ng-if="item.processDate!='0001-01-01T00:00:00'">
+                         {{item.processDate | date:'d MMM yyyy HH:mm'}}
+                        </div>
+                     </td>
+                     <td>
+                         <div ng-if="item.finished_Date!='0001-01-01T00:00:00'">
+                             {{item.finished_Date | date:'d MMM yyyy HH:mm'}}
+                         </div>
+                         
+                     </td>	
+                    <td>{{item.status}}</td>
+                    <td>
+                        <div style="width:100px">
+                                {{item.messageLog}}
+                        </div>
+                    </td>
+                    <td align="center" style="color:blue">
+                        <button class="btn btn-primary"  ng-click="ctrl.goto('TablueDetail',item)" ng-disabled="item.queueType=='Generate Dashboard for SM'">View Detail</button></td>
+                    <td>
+                        <button class="btn btn-success" ng-click="ctrl.reprocess(item)" ng-if="item.status=='Tableau Failed'|| item.status=='Tableau Success'">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    
+                        <button class="btn btn-success" ng-If="item.status!='Tableau Failed'&& item.status!='Tableau Success'" disabled>
+                        <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <ul class="records-info records-info-bottom">
+        <li> </li> <a class="bt-prev" href="" ng-click="ctrl.previousPage()"><i class="fa-caret-left"></i></a> <input
+            type="text" size="3" ng-model="ctrl.criteria.pageNumber" disabled="">
+        <a href="" class="bt-next" ng-click="ctrl.nextPage()"><i class="fa-caret-right"></i></a> From {{ctrl.totalPage}}
+        pages
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li> Item per page
+            <select class="show-rec-no" ng-model="ctrl.criteria.pageSize" ng-change="ctrl.changePageSize()"
+                ng-options="x for x in ctrl.pageSizes">
+            </select> Rows </li>
+        <li> &nbsp; <strong>|</strong> &nbsp; </li>
+        <li>All <strong>{{ctrl.criteria.total}}</strong> items</li>
+    </ul>
+
+    <div class="tool-bottom col-xs-12" ng-show="ctrl.canEdit">
+        <ul>
+            <li><button class="bt-clear" ng-show="ctrl.showDelete" ng-click="ctrl.deletePolicies()" id="bt-clear"><i
+                        class="fa-trash"></i> Delete </button></li>
+        </ul>
+    </div>
+    <script type="text/ng-template" id="confirm-delete.html">
+
+        <div class="modal-body" id="modal-body-editor">
+            หากต้องการลบ กรุณายืนยันอีกครั้ง
+        </div>
+        <div class="modal-footer">
+            <button class="bt-confirm" ng-click="submit()" type="button">OK</button>
+            <button class="" ng-click="close()" type="button">Cancel</button>
+        </div>
+    </script>
+</div>
+<!--main-content-->

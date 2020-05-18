@@ -1,0 +1,75 @@
+<div class="box-topic">
+  <a  href="" (click)="false">News</a> <strong class="active"> > {{data.categoryName}}</strong>
+</div>
+
+<div class="col-12 text-center" [hidden]="!loading">
+  <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+</div>
+
+<div class="title-award" [hidden]="loading">
+  {{data.announceDate | thDate | date:'dd/MM/yyyy'}}
+  <br>
+  <strong>{{ data.topic }} </strong>
+</div>
+<div class="cleaner"></div>
+<div *ngIf="data.description" class="text-view-award" [innerHTML]="data.description | safeHtml">
+
+</div>
+<div class="row">
+
+
+  <div class="col-12 col-sm-12 col-md-12 text-center">
+
+    <div id="carousel-wrapper">
+      <div id="carousel">
+
+        <a *ngFor="let item of data.images;let i = index" [href]='item.filePath' [id]="'gallery'+i" rel="gallery"
+          [title]="item.fileName" data-fancybox="gallery" [attr.data-caption]='item.fileName'>
+          <img [src]="item.filePath">
+          <!-- <img src="assets/images/activities-1.jpg"> -->
+        </a>
+        <div class="clearfix"></div>
+
+      </div>
+      <!--carousel-->
+      <div class="clearfix"></div>
+    </div>
+    <!--carousel-wrapper-->
+    
+    <div class="h10"></div>
+
+    <div id="thumbs-wrapper">
+      <div id="thumbs">
+        <a *ngFor="let item of data.images;let i = index" [href]="'#gallery'+i">
+          <img [src]="item.filePath">
+          <!-- <img src="assets/images/activities-1.jpg"> -->
+        </a>
+        <div class="cleaner h20"></div>
+      </div>
+      <!--thumbs-->
+      <a id="prev" href="#"></a>
+      <a id="next" href="#"></a>
+    </div>
+    <!--thumbs-wrapper-->
+
+    <div class="cleaner h10"></div>
+  </div>
+  <!--col-12-->
+</div>
+<!--row-->
+
+<div class="cleaner h30"></div>
+
+<a href="javascript:void(0)" (click)="downloadFile()" [hidden]="loading">
+  <div class="all-download-img">
+    <img src="assets/images/icon-download.png" [hidden]="downloading" class="img-fluid" />
+    <span [hidden]="!downloading"><i class="fa fa-xs fa-spinner fa-spin" aria-hidden="true"></i></span> Download All
+    Image
+  </div>
+</a>
+<a (click)="location.back()">
+    <div class="all-download-img" style="cursor: pointer; float: left;">
+        <i class="fa fa-arrow-left" aria-hidden="true" style="padding-top:5px;"></i>
+      Back
+    </div>
+  </a>

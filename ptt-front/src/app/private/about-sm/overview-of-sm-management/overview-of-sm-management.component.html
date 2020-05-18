@@ -1,0 +1,76 @@
+<div class="row ">
+  <div class="col-12 col-md-12 d-flex ">
+    <div class="box-topic">About SM <strong class="active"> > {{data.title}} </strong></div>
+  </div>
+</div>
+<div class="cleaner h30"></div>
+<div class="row box-article  font-subtopic">
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+</div>
+<div *ngIf="data" [innerHTML]="data.content | safeHtml"></div>
+<div *ngIf="!data"></div>
+
+<!-- <div class="cleaner h30"></div>
+<div class="row mx-0 box-border-line">
+  <div class="col-12 py-2 font-navy font-subtopic">
+    ปตท. นำเป้าหมายการพัฒนาที่ยั่งยืน ขององค์การสหประชาชาติเข้ามาเป็นส่วนหนึ่งของการกำหนดทิศทางธุรกิจของ ปตท.
+    เพื่อมุ่งสู่
+    "Sustainable Growth for all" เป้าหมายที่สำคัญ 7 เป้าหมายหลัก ได้แก่ เป้าหมายที่ 7,8,12,13,14,15,16
+  </div>
+  <div class="line-color-1 h10"></div>
+</div>
+<div class="cleaner h30"></div>
+
+<div class="row mx-0 justify-content-center text-center">
+  <div class="col-6 col-md py-2"><a href="javascript:void(0)" class="hvr-float-shadow"><img src="assets/images/icon-1.png"
+        class="img-fluid"></a></div>
+  <div class="col-6 col-md py-2"><a href="javascript:void(0)" class="hvr-float-shadow"><img src="assets/images/icon-2.png"
+        class="img-fluid"></a></div>
+  <div class="col-6 col-md py-2"><a href="javascript:void(0)" class="hvr-float-shadow"><img src="assets/images/icon-3.png"
+        class="img-fluid"></a></div>
+  <div class="col-6 col-md py-2"><a href="javascript:void(0)" class="hvr-float-shadow"><img src="assets/images/icon-4.png"
+        class="img-fluid"></a></div>
+  <div class="col-6 col-md py-2"><a href="javascript:void(0)" class="hvr-float-shadow"><img src="assets/images/icon-5.png"
+        class="img-fluid"></a></div>
+  <div class="col-6 col-md py-2"><a href="javascript:void(0)" class="hvr-float-shadow"><img src="assets/images/icon-6.png"
+        class="img-fluid"></a></div>
+  <div class="col-6 col-md py-2"><a href="javascript:void(0)" class="hvr-float-shadow"><img src="assets/images/icon-7.png"
+        class="img-fluid"></a></div>
+  <div class="cleaner h30"></div>
+</div>
+<div class="row mx-0 justify-content-center">
+  <div class="col-12 font-subtopic">
+    เพื่อให้เกิดสามารถบรรลุ Aspiration ดังกล่าว จึงได้กำหนด Sustainability Strategic Direction ในปี 2030
+    "ให้มีการเสริมสร้างความ
+    ยืดหยุ่นให้องค์กรสามารถปรับตัวเข้ากับสถานการณ์ที่เปลี่ยนแปลงของโลกได้ โดยยังคงความเป็นเลิศทางธุรกิจ
+    ตลอดจนในห่วงโซ่อุปทาน
+    และขยายสู่สังคมภายนอกอย่างต่อเนื่อง
+  </div>
+  <div class="cleaner h20"></div>
+  <div class="col-12 text-center box-topic-blue font-subtopic">
+    ภายใต้ Strategic Direction ได้กำหนด Strategic Objectives ด้านความยั่งยืนไว้ ดังนี้
+  </div>
+  <div class="cleaner h20"></div>
+
+</div> -->
+<!-- <div class="row font-subtopic">
+
+  <div class="col-12 text-center" [hidden]="!loading">
+    <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+  </div>
+
+  <div class="col-12 col-md-4 mt-3" [hidden]="loading" *ngFor="let item of data">
+    <div class="box-strategic">
+      <div class="circle-green" *ngIf="item.title === 'Existing business'"></div>
+      <div class="circle-yellow" *ngIf="item.title === 'New business'"></div>
+      <div class="circle-blue" *ngIf="item.title !== 'Existing business' && item.title !== 'New business'"></div>
+      <strong> {{item.title}} </strong>
+      <div class="box-strategic-green px-2 py-2" [innerHTML]="item.content | safeHtml">
+
+      </div>
+    </div>
+  </div>
+
+</div> -->

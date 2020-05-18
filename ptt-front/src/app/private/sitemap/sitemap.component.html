@@ -1,0 +1,31 @@
+<div class="col-12 col col-lg-12">
+  <div class="cleaner"></div>
+  <div class="box-topic">
+    <!--<span class="active">  Search </span>-->
+    <div class="col-12 font-navy">
+      <!--<div class="cleaner h10"></div>-->
+      <strong>Sitemap </strong>
+      <div class="cleaner h10"></div>
+    </div>
+  </div>
+  <div class="cleaner"></div>
+
+  <div class="row mx-0 box-report-data">
+
+    <div class="col-12 mb-2" *ngFor="let item of sitemaps">
+      <a href="javascript:void(0)" (click)="goto(item)">
+        <div class="row mx-0 p-2 box-sitemap box-app2">
+          <div class="col-12">
+            <strong class="font-navy font-topic line-clamp-1">{{item.name}} </strong>
+            <div class="cleaner"></div>
+          </div>
+        </div>
+        <div class="cleaner"></div>
+      </a>
+    </div>
+    <!--box1-->
+
+  </div>
+  <!--row-->
+  <div class="cleaner h30"></div>
+</div>

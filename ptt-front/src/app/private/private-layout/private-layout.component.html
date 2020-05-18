@@ -1,0 +1,392 @@
+<div class="all-left-menu d-block d-lg-none">
+
+  <nav class="navbar navbar-expand-lg headbar-top fixed-top">
+    <!--fixed-top-->
+    <div class="container bg-color-header">
+      <div class="hamburgers-box">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" (click)="navigateMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand"><img src="assets/images/login-left.png" (click)="back()" style="cursor: pointer;"
+            height="60"></a>
+      </div>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <!-- <a class="navbar-logo-mobile d-block d-sm-none"><img src="assets/images/login-left.png"></a> -->
+
+        <div class="right-menu-mb col-12">
+          <div class="row mx-0">
+            <div class="form-group col-sm-5">
+              <input type="text" placeholder="Search" name="Search" autocomplete="off" [(ngModel)]="keyword"
+                (keypress)="eventHandler($event.keyCode)">
+              <span (click)="search()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="col-sm-3 px-0">
+              <a href="#">
+                <div class="box-username text-center">
+                  <i class="fa fa-user"></i>
+                  <span class="username">{{info.firstName+' '+info.lastName}}</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="cleaner h10 line-color-1"></div>
+
+        <ul class="navbar-nav menu-list">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/home/highlight']">
+              <img src="assets/images/menu-1.png"> Home
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#" (click)="goto('about-sm',getSubMenu('about-sm')[0])"
+              class="nav-link dropdown-sub d-block d-lg-none" data-toggle="dropdown" role="button"
+              aria-expanded="false">
+              <img src="assets/images/menu-2.png"> About SM
+              <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+            </a>
+            <!--/********************************/-->
+            <ul class="dropdown-menu" role="menu">
+
+              <li class='dropdown dropdown-submenu' *ngFor="let item of getSubMenu('about-sm');let i = index_item">
+                <a (click)="goto('about-sm',item)"> {{item.name}} </a>
+              </li>
+
+            </ul>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/home/applications']"><img src="assets/images/menu-3.png">
+              Applications</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#" (click)="goto('news',getSubMenu('news')[0])" class="nav-link dropdown-sub d-block d-lg-none"
+              data-toggle="dropdown" role="button" aria-expanded="false">
+              <img src="assets/images/menu-4.png"> News
+              <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+            </a>
+            <!--/********************************/-->
+            <ul class="dropdown-menu" role="menu">
+              <li class='dropdown dropdown-submenu' *ngFor="let item of getSubMenu('news');let i = index_item">
+                <a (click)="goto('news',item)"> {{item.name}} </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#" (click)="goto('policy-and-target',getSubMenu('policy-and-target')[0])"
+              class="nav-link dropdown-sub d-block d-lg-none" data-toggle="dropdown" role="button"
+              aria-expanded="false">
+              <img src="assets/images/menu-5.png"> Policy and Target
+              <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+            </a>
+            <!--/********************************/-->
+            <ul class="dropdown-menu" role="menu">
+              <li class='dropdown dropdown-submenu'
+                *ngFor="let item of getSubMenu('policy-and-target');let i = index_item">
+                <a (click)="goto('policy-and-target',item)"> {{item.name}} </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a href="#" (click)="goto('download',getSubMenu('download')[0])"
+              class="nav-link dropdown-sub d-block d-lg-none" data-toggle="dropdown" role="button"
+              aria-expanded="false">
+              <img src="assets/images/menu-6.png"> Download
+              <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+            </a>
+            <div class="cleaner"></div>
+            <!--/********************************/-->
+            <ul class="dropdown-menu" role="menu">
+
+              <li class='dropdown dropdown-submenu' *ngFor="let item of getSubMenu('download');let i = index_item">
+                <a (click)="goto('download',item)"> {{ item.name }} </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="#" (click)="goto('download',getSubMenu('dashboard')[0])"
+              class="nav-link dropdown-sub d-block d-lg-none" data-toggle="dropdown" role="button"
+              aria-expanded="false">
+              <img src="assets/images/dashboard.png"> Dashboard
+              <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+            </a>
+            <div class="cleaner"></div>
+            <!--/********************************/-->
+            <ul class="dropdown-menu" role="menu">
+
+              <li class='dropdown dropdown-submenu' *ngFor="let item of getSubMenu('dashboard');let i = index_item">
+                <a (click)="goto('dashboard',item)"> {{ item.name }} </a>
+              </li>
+
+            </ul>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a href="#" [routerLink]="['/home/contact-us/contact-form']" class="nav-link dropdown-sub d-block d-lg-none"
+              data-toggle="dropdown" role="button" aria-expanded="false">
+              <img src="assets/images/menu-7.png"> Contact Us
+              <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+            </a>
+
+            <!--/********************************/-->
+            <ul class="dropdown-menu" role="menu">
+              <li class='dropdown dropdown-submenu'>
+                <a [routerLink]="['/home/contact-us/contact-form']"> Contact Form </a>
+              </li>
+              <li class='dropdown dropdown-submenu'>
+                <a [routerLink]="['/home/contact-us/faq']"> FAQs </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="height-box d-block d-lg-none" no-bg></div>
+<div class="bg-content font-navy page-home all-container">
+  <div class="container-fluid bg">
+    <div class="row justify-content-md-center d-none d-lg-flex">
+      <div class="col-4 col col-lg-4">
+        <div class="img-fixed">
+
+          <img src="assets/images/login-left.png" (click)="back()" class="img-fluid" />
+        </div>
+      </div>
+      <div class="col-8 col col-lg-8">
+        <div class="right-menu-mb">
+          <div class="form-group">
+            <input type="text" placeholder="Search" name="Search" autocomplete="off" [(ngModel)]="keyword"
+              (keypress)="eventHandler($event.keyCode)">
+            <a href="javascript:void(0)" style="user-select: none;" (click)="search()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="form-group" *ngIf="!winAuth" [routerLink]="['/home/change-password']">
+            <i class="fa fa-user"></i>
+            <input type="text" style="pointer-events: none;" [placeholder]="info.firstName+' '+info.lastName"
+              name="name" autocomplete="off">
+          </div>
+          <div class="form-group" *ngIf="winAuth">
+            <i class="fa fa-user"></i>
+            <input type="text" style="pointer-events: none;" [placeholder]="info.firstName+' '+info.lastName"
+              name="name" autocomplete="off">
+          </div>
+
+          <div class="bt-logout" (click)="logout()"> <i class="fas fa-sign-out-alt"></i> Log out</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row  justify-content-md-center" style="pointer-events: none;">
+
+      <div class="col-12 col-sm-4 col col-lg-4 all-left-menu d-none d-lg-block" style="pointer-events: none;">
+
+        <div class="left-menu" style="pointer-events: none;">
+          <!-- <div class="box-img-left-menu">
+            <div>
+              <img src="assets/images/img-menu.png" class="img-left-menu">
+              <div class="mg-left-menu list-menu-3">
+
+                <div class="list-menu list-menu-0" id="main-menu" data-id="0">
+                  <div class="box-icon">
+                    <svg class="svg-inline--fa fa-bars fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                      data-fa-i2svg="">
+                      <path fill="currentColor"
+                        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z">
+                      </path>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="list-menu list-menu-3-1 menu" data-id="3-1" style="opacity: 1;">
+                  <a href="home.html">
+                    <div class="box-icon">
+                      <img src="images/menu-1.png" class="img-fluid">
+                      <div class="text-menu">Home</div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="list-menu list-menu-3-2 menu child-4" data-id="3-2" style="opacity: 1;">
+                  <div class="box-icon">
+                    <img src="images/menu-2.png" class="img-fluid">
+                    <div class="text-menu">About SM</div>
+                  </div>
+
+                  <div class="box-sub-menu" style="display: none;">
+
+                    <div class="menu-sub">
+                      <div class="img-menu" data-id="2">
+                        <a href="about-sm/overview.html">
+                          <div class="box-icon">
+                            <img src="images/about-1.png" class="img-fluid">
+                            <div class="text-menu-sub">Overview of SM Management</div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="menu-sub">
+                      <div class="img-menu" data-id="2">
+                        <a href="about-sm/vision.html">
+                          <div class="box-icon">
+                            <img src="images/about-2.png" class="img-fluid">
+                            <div class="text-menu-sub">SM Vision and Mission</div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="menu-sub">
+                      <div class="img-menu" data-id="2">
+                        <a href="about-sm/governance.html">
+                          <div class="box-icon">
+                            <img src="images/about-3.png" class="img-fluid">
+                            <div class="text-menu-sub">SM Governance Mechanism </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="menu-sub">
+                      <div class="img-menu" data-id="2">
+                        <a href="about-sm/function.html">
+                          <div class="box-icon">
+                            <img src="images/about-4.png" class="img-fluid">
+                            <div class="text-menu-sub">SM Function</div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+
+
+
+                  </div>
+
+                </div>
+
+
+                <div class="list-menu list-menu-3-3 menu" data-id="3-3" style="opacity: 1;">
+                  <a href="applications/index_item.html">
+                    <div class="box-icon">
+                      <img src="images/menu-3.png" class="img-fluid">
+                      <div class="text-menu"> Applications </div>
+                    </div>
+                  </a>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+
+            </div>
+          </div> -->
+          <div class="box-img-left-menu no_event">
+            <div class="arr-up-contain"
+              *ngIf="(num+index_item>7&&first<index_item&&viewSub)||(num+index_item>7&&first<index_item+1&&!viewSub)">
+              <div class="contain" (click)="up()">
+                <div class="arrow-down">
+
+                </div>
+              </div>
+            </div>
+            <div class="arr-down-contain"
+              *ngIf="(num+index_item>7&&last>5+index_item&&viewSub)||(num+index_item>7&&last>7+index_item&&!viewSub)">
+              <div class="contain-down" (click)="down()">
+                <div class="arrow-up">
+
+                </div>
+              </div>
+
+            </div>
+            <img src="assets/images/img-menu.png" class="img-left-menu" style="cursor: pointer" (click)="back()">
+            <div class="list-menu list-menu-0" id="main-menu" data-id="0" (click)="toggle()">
+              <div class="box-icon">
+                <i class="fas fa-bars"></i>
+              </div>
+            </div>
+
+
+            <ng-container *ngFor="let item of menuItems;let i=index;">
+              <div
+                class="list-menu {{'list-menu-'+menuLength()+'-'+(parseInt(item.class)+(viewSub?1:0))}} {{item.active?'new_active':' '}} menu"
+                *ngIf="item.class>0&&parseInt(item.class)+index_item<8" (click)="open(item)">
+                <div class="box-icon" *ngIf="!item.download">
+                  <div>
+                    <i [class]="item.icon" [ngStyle]="{color:'#1f196e'}" *ngIf="item.icon"></i>
+                    <img *ngIf="item.iconImagePath" [src]="item.iconImagePath" />
+                    <img *ngIf="!item.icon && !item.iconImagePath" [src]="item.src" />
+
+                    <div class="text-menu-sub">{{item.text}}</div>
+                  </div>
+
+                </div>
+              </div>
+              <div
+                class="list-menu {{'list-menu-'+menuLength()+'-'+(parseInt(item.class)+(viewSub?1:0))}} {{item.active?'new_active':' '}} menu"
+                *ngIf="item.download&&item.class>0&&parseInt(item.class)+index_item<8"
+                (click)="navigate(item,'download',item.item)">
+                <div class="box-icon">
+
+                  <div>
+                    <i [class]="item.icon" [ngStyle]="{color:'#1f196e'}" *ngIf="item.icon"></i>
+                    <img *ngIf="item.iconImagePath" [src]="item.iconImagePath" />
+                    <img *ngIf="!item.icon && !item.iconImagePath" [src]="item.src" />
+
+                    <div class="text-menu-sub">{{item.text}}</div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div class="list-menu {{'list-menu-'+menuLength()+'-1'}} menu " *ngIf="viewSub">
+              <div class="box-icon" (click)="navigate(menuItems[0],parent.getchild, getSubMenu(parent.getchild)[0]);">
+
+                <div>
+                  <img [src]="parent.src" class="img-fluid">
+                  <div class="text-menu-sub">{{parent.text}}</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="cleaner"></div>
+      </div>
+      <!---->
+      <div class="col-12 col col-lg-8" style="pointer-events:all;">
+        <router-outlet></router-outlet>
+        <div class="cleaner h30"></div>
+        <div class="cleaner h30"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cleaner"></div>
+<div id="footer" [class]="footerCls">
+  <div class="col-12 text-right py-1 ">
+    <div class="col-12 text-right py-1 "><a href="javascript:void(0)" (click)="openSitemap()"> Sitemap <i
+          class="fas fa-sitemap"></i></a> </div>
+  </div>
+</div>
